@@ -36,6 +36,11 @@
   <main>
     <section id="hero" class="hero">
       <div class="hero-bg"></div>
+      <div class="hero-slideshow" aria-hidden="true">
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1500&q=80');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1500&q=80');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1500&q=80');"></div>
+      </div>
       <div class="container hero-content">
         <div class="hero-copy">
           <h1>We Grow Your Business Online</h1>
@@ -55,13 +60,25 @@
         </div>
         <div class="about-copy">
           <h2>About zyDual</h2>
-          <p>We are a full-stack digital agency delivering tailored experiences that connect brands with customers. From wireframes to results, we craft solutions that scale.</p>
-          <ul>
-            <li>Strategic consulting for business growth</li>
-            <li>Beautiful web and mobile experiences</li>
-            <li>Data-backed marketing campaigns</li>
-            <li>Brand identity that stands out</li>
-          </ul>
+          <p>zyDual is a growth-focused digital consultancy combining data-led strategy, design craftsmanship, and measurable execution. We help mid-market and enterprise brands scale via digital experiences that convert and retain customers.</p>
+          <div class="about-grid">
+            <div class="about-point">
+              <h4>01.</h4>
+              <p>Dedicated strategic roadmap with KPI alignment and quarterly performance reviews.</p>
+            </div>
+            <div class="about-point">
+              <h4>02.</h4>
+              <p>Cross-functional design + engineering teams for pixel-perfect deployment and speed.</p>
+            </div>
+            <div class="about-point">
+              <h4>03.</h4>
+              <p>Growth marketing layer with testing, analytics, and paid/organic scaling discipline.</p>
+            </div>
+            <div class="about-point">
+              <h4>04.</h4>
+              <p>Full lifecycle support: launch, optimization, and managed evolution.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -138,14 +155,41 @@
       </div>
     </section>
 
+    <section id="projects" class="section projects fade-in">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Live deployments and success stories.</p>
+        <div class="grid projects-grid">
+          <article class="project-card glass-card">
+            <div class="project-image" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80');"></div>
+            <h3>AI-driven Analytics Platform</h3>
+            <p>Real-time data pipelines, dashboarding, and conversion optimization for enterprise clients.</p>
+            <span>Web App / Data</span>
+          </article>
+          <article class="project-card glass-card">
+            <div class="project-image" style="background-image:url('https://images.unsplash.com/photo-1505238680356-667803448bb6?auto=format&fit=crop&w=1000&q=80');"></div>
+            <h3>Global E-commerce Store</h3>
+            <p>Headless commerce architecture with integrated logistics and customer experience improvements.</p>
+            <span>Shopify / React</span>
+          </article>
+          <article class="project-card glass-card">
+            <div class="project-image" style="background-image:url('https://images.unsplash.com/photo-1506401112900-58fe149ad8fd?auto=format&fit=crop&w=1000&q=80');"></div>
+            <h3>Brand Repositioning Campaign</h3>
+            <p>Brand identity refresh, long-term social media growth, and 2.4x ROI in 8 weeks.</p>
+            <span>Marketing / Design</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="stats" class="section stats fade-in">
       <div class="container">
         <h2 class="section-title">Our Impact</h2>
         <div class="grid stats-grid">
-          <div class="stat-card glass-card"><div class="stat-number" data-target="125">0</div><p>Projects Completed</p></div>
-          <div class="stat-card glass-card"><div class="stat-number" data-target="95">0</div><p>Satisfied Clients</p></div>
-          <div class="stat-card glass-card"><div class="stat-number" data-target="510">0</div><p>Campaigns Launched</p></div>
-          <div class="stat-card glass-card"><div class="stat-number" data-target="10">0</div><p>Years Experience</p></div>
+          <div class="stat-card glass-card"><div class="stat-number" data-target="4">4</div><p>Projects Completed</p></div>
+          <div class="stat-card glass-card"><div class="stat-number" data-target="4">4</div><p>Satisfied Clients</p></div>
+          <div class="stat-card glass-card"><div class="stat-number" data-target="1">1</div><p>Campaigns Launched</p></div>
+          <div class="stat-card glass-card"><div class="stat-number" data-target="2">2</div><p>Years Experience</p></div>
         </div>
       </div>
     </section>
@@ -155,14 +199,17 @@
         <h2 class="section-title">Testimonials</h2>
         <div class="testimonials-wrapper">
           <article class="testimonial-card glass-card active">
+            <div class="testimonial-stars">★★★★★</div>
             <p>“zyDual transformed our online presence and drove 3x revenue in six months. Their team is strategic, reliable, and creative.”</p>
             <h4>— Emily Carter, CEO</h4>
           </article>
           <article class="testimonial-card glass-card">
+            <div class="testimonial-stars">★★★★★</div>
             <p>“The web experience they built reflects the premium quality of our brand. The process was smooth, and results were immediate.”</p>
             <h4>— Michael S., Growth Lead</h4>
           </article>
           <article class="testimonial-card glass-card">
+            <div class="testimonial-stars">★★★★★</div>
             <p>“A passionate agency that delivers measurable ROI. From design to execution, they were outstanding.”</p>
             <h4>— Sophia L., Marketing Director</h4>
           </article>
@@ -185,6 +232,16 @@
             <li>📧 zydual.in@gamil.com</li>
             <li>📞 +91 9087899641</li>
           </ul>
+          <div class="contact-map">
+            <iframe
+              src="https://maps.google.com/maps?q=11.080825132243255,76.9975226480009&z=15&output=embed"
+              width="100%"
+              height="240"
+              style="border:0; border-radius: 12px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
         <form id="contactForm" class="contact-form glass-card" novalidate>
           <div class="form-row"><label for="name">Name</label><input type="text" id="name" name="name" required /></div>
@@ -199,7 +256,8 @@
 
   <footer class="footer">
     <div class="container footer-grid">
-      <div>
+      <div class="footer-brand">
+        <img src="zyDual-logo.jpeg" alt="zyDual logo" class="footer-logo" />
         <p><strong>zyDual</strong></p>
         <p>Building digital experiences that boost brands.</p>
       </div>

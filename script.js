@@ -117,6 +117,12 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   showTestimonial(0);
+
+  let testimonialIndex = 0;
+  setInterval(() => {
+    testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
+    showTestimonial(testimonialIndex);
+  }, 6000);
 });
 
 form.addEventListener('submit', (e) => {
