@@ -126,16 +126,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Website cost calculator
   const costConfig = {
-    base: 400,
-    planType: { wordpress: 0, custom: 1200 },
-    pages: { 5: 500, 10: 900, 15: 1300 },
+    base: 33200, // 400 USD
+    planType: { wordpress: 0, custom: 99600 }, // 1200 USD
+    pages: { 5: 41500, 10: 74700, 15: 107900 }, // 500, 900, 1300 USD
     features: {
-      ecommerce: 1200,
-      adminDashboard: 800,
-      userAuth: 600,
-      paymentGateway: 900,
-      seo: 500,
-      maintenance: 350,
+      ecommerce: 99600, // 1200 USD
+      adminDashboard: 66400, // 800 USD
+      userAuth: 49800, // 600 USD
+      paymentGateway: 74700, // 900 USD
+      seo: 41500, // 500 USD
+      maintenance: 29050, // 350 USD
     },
   };
 
@@ -176,10 +176,10 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     breakdownList.innerHTML = breakdown
-      .map((item) => `<li><span>${item.label}</span><span>$${item.value.toLocaleString()}</span></li>`)
+      .map((item) => `<li><span>${item.label}</span><span>₹${item.value.toLocaleString()}</span></li>`)
       .join('');
 
-    totalCostEl.textContent = `$${total.toLocaleString()}`;
+    totalCostEl.textContent = `₹${total.toLocaleString()}`;
   }
 
   if (planTypeEl) planTypeEl.addEventListener('change', updateCostCalculator);
