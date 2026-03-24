@@ -126,16 +126,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Website cost calculator
   const costConfig = {
-    base: 33200, // 400 USD
-    planType: { wordpress: 0, custom: 99600 }, // 1200 USD
-    pages: { 5: 41500, 10: 74700, 15: 107900 }, // 500, 900, 1300 USD
+    base: 5000, // 400 USD
+    planType: { wordpress: 5000, custom: 12000 }, // 1200 USD
+    pages: { 5: 1500, 10: 4700, 15: 7900 }, // 500, 900, 1300 USD
     features: {
-      ecommerce: 99600, // 1200 USD
-      adminDashboard: 66400, // 800 USD
-      userAuth: 49800, // 600 USD
-      paymentGateway: 74700, // 900 USD
-      seo: 41500, // 500 USD
-      maintenance: 29050, // 350 USD
+      ecommerce: 9600, // 1200 USD
+      adminDashboard: 1400, // 800 USD
+      userAuth: 9800, // 600 USD
+      paymentGateway: 5000, // 900 USD
+      seo: 1999, // 500 USD
+      maintenance: 3000, // 350 USD
     },
   };
 
