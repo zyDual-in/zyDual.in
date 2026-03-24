@@ -124,7 +124,7 @@
       </div>
     </section>
 
-    <section id="pricing" class="section fade-in">
+    <section id="Plans" class="section fade-in">
       <div class="container">
         <h2 class="section-title">Pricing Plans</h2>
         <p class="section-subtitle">Choose a plan that fits your growth stage. All plans are crafted for strategic execution and measurable ROI.</p>
@@ -174,29 +174,55 @@
 
     <section id="company-docs" class="section fade-in">
       <div class="container">
-        <h2 class="section-title">Know About Us</h2>
-        <p class="section-subtitle">zyDual is dedicated to building modern digital experiences, blending design, tech and growth strategy into measurable business outcomes.</p>
-        <div class="grid two-col">
-          <div class="glass-card">
-            <h3>Our Mission</h3>
-            <p>We empower businesses with agile web & marketing systems designed to increase conversions, reduce friction, and scale like a startup.</p>
-            <ul>
-              <li>Data-driven strategy and performance measurement</li>
-              <li>Design systems with accessibility and branding coherence</li>
-              <li>Growth operations and ongoing optimization</li>
-              <li>Transparent communication and accountability</li>
-            </ul>
+        <h2 class="section-title">Company Docs & Cost Estimator</h2>
+        <p class="section-subtitle">Explore our company profile and calculate your website cost instantly.</p>
+
+        <div class="company-docs-layout">
+          <div class="glass-card docs-preview">
+            <h3>Document Preview</h3>
+            <p>Browse the embedded company profile directly on the page.</p>
+            <iframe id="pdfPreview" src="zyDual.pdf" title="Company PDF Preview"></iframe>
+            <p style="margin-top:0.75rem; color:#cbd5e1; font-size:0.95rem;">Tip: scroll inside the frame to move slides/pages.</p>
           </div>
-          <div class="glass-card">
-            <h3>Our Story</h3>
-            <p>Started in 2022 by a team of engineers and marketers, zyDual has delivered more than 80 successful digital products and brand campaigns.</p>
-            <p>We work with global clients in SaaS, education, healthcare, fintech, and e-commerce. Our solutions include custom web apps, marketplaces, conversion funnels, and omnichannel marketing engines.</p>
+
+          <div class="glass-card cost-calculator">
+            <h3>Website Cost Calculator</h3>
+            <p>Select options below and see the breakdown update instantly.</p>
+
+            <label for="planType">Website type</label>
+            <select id="planType">
+              <option value="wordpress">WordPress</option>
+              <option value="custom">Custom Development</option>
+            </select>
+
+            <label>Number of pages</label>
+            <div class="option-group">
+              <label><input type="radio" name="pageCount" value="5" checked> 5 pages</label>
+              <label><input type="radio" name="pageCount" value="10"> 10 pages</label>
+              <label><input type="radio" name="pageCount" value="15"> 15+ pages</label>
+            </div>
+
+            <label>Extra features</label>
+            <div class="option-group checkboxes">
+              <label><input type="checkbox" id="ecommerce" value="ecommerce"> E-commerce functionality</label>
+              <label><input type="checkbox" id="adminDashboard" value="adminDashboard"> Admin dashboard</label>
+              <label><input type="checkbox" id="userAuth" value="userAuth"> User authentication (login/register)</label>
+              <label><input type="checkbox" id="paymentGateway" value="paymentGateway"> Payment gateway integration</label>
+              <label><input type="checkbox" id="seo" value="seo"> SEO optimization</label>
+              <label><input type="checkbox" id="maintenance" value="maintenance"> Maintenance/support plan</label>
+            </div>
+
+            <div class="breakdown-box">
+              <h4>Feature-based breakdown</h4>
+              <ul id="breakdownList"></ul>
+            </div>
+
+            <div class="total-box">
+              <h4>Total Estimate</h4>
+              <p id="totalCost">$0</p>
+              <small>Estimated cost; final quote provided after discovery call.</small>
+            </div>
           </div>
-        </div>
-        <div class="glass-card" style="margin-top: 2rem; text-align: center;">
-          <h3>Download Company Guide</h3>
-          <p>Use this document to share our vision, process, and service model with stakeholders.</p>
-          <a href="company-profile.pdf" target="_blank" class="btn btn-primary" style="margin-top: 0.8rem;">Download PDF</a>
         </div>
       </div>
     </section>
@@ -241,21 +267,21 @@
         <div class="grid projects-grid">
           <article class="project-card glass-card">
             <div class="project-image" style="background-image:url('Realtech.jpeg');"></div>
-            <h3>RealTech IT Academy Website (WordPress Development)</h3>
+            <h3>RealTech IT Academy Website (Hyderabad, Telangana)</h3>
             <p>Designed and developed a modern, responsive website for a Hyderabad-based IT training institute using WordPress. The goal was to improve online presence, showcase courses, and increase student inquiries</p>
             <span>Web App / Data</span>
           </article>
           <article class="project-card glass-card">
             <div class="project-image" style="background-image:url('Vetriarasi.jpeg');"></div>
-            <h3>E-commerce Store</h3>
+            <h3>E-commerce Store (Vellore, Tamil Nadu)</h3>
             <p>Developed a full-stack e-commerce web application for a water supply business using HTML, CSS, JavaScript, PHP, and MySQL. The platform includes user authentication, product ordering, admin dashboard, and real-time delivery tracking, providing a complete and user-friendly solution for managing online orders and deliveries.</p>
             <span>Blinkit / Grocery Shop</span>
           </article>
           <article class="project-card glass-card">
-            <div class="project-image" style="background-image:url('https://images.unsplash.com/photo-1506401112900-58fe149ad8fd?auto=format&fit=crop&w=1000&q=80');"></div>
-            <h3>Brand Repositioning Campaign</h3>
-            <p>Brand identity refresh, long-term social media growth, and 2.4x ROI in 8 weeks.</p>
-            <span>Marketing / Design</span>
+            <div class="project-image" style="background-image:url('saidha.jpeg');"></div>
+            <h3>Jewelry E-commerce Website for Saidah Collections (Apex, NC, USA)</h3>
+            <p>Developed a fully functional e-commerce website for a US-based jewelry brand located in Apex, NC, USA using WordPress. The website features product listings, category navigation, a secure shopping cart, and a seamless checkout experience, delivering an elegant and user-friendly online shopping platform.</p>
+            <span>Cosmetic / Design</span>
           </article>
         </div>
       </div>
@@ -265,10 +291,10 @@
       <div class="container">
         <h2 class="section-title">Our Impact</h2>
         <div class="grid stats-grid">
-          <div class="stat-card glass-card"><div class="stat-number" data-target="4">4</div><p>Projects Completed</p></div>
-          <div class="stat-card glass-card"><div class="stat-number" data-target="4">4</div><p>Satisfied Clients</p></div>
+          <div class="stat-card glass-card"><div class="stat-number" data-target="7">7</div><p>Projects Completed</p></div>
+          <div class="stat-card glass-card"><div class="stat-number" data-target="20">20</div><p>Satisfied Clients</p></div>
           <div class="stat-card glass-card"><div class="stat-number" data-target="1">1</div><p>Campaigns Launched</p></div>
-          <div class="stat-card glass-card"><div class="stat-number" data-target="2">2</div><p>Years Experience</p></div>
+          <div class="stat-card glass-card"><div class="stat-number" data-target="6">6</div><p>Years Experience</p></div>
         </div>
       </div>
     </section>

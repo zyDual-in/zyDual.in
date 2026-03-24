@@ -123,6 +123,70 @@ window.addEventListener('DOMContentLoaded', () => {
     testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
     showTestimonial(testimonialIndex);
   }, 6000);
+
+  // Website cost calculator
+  const costConfig = {
+    base: 400,
+    planType: { wordpress: 0, custom: 1200 },
+    pages: { 5: 500, 10: 900, 15: 1300 },
+    features: {
+      ecommerce: 1200,
+      adminDashboard: 800,
+      userAuth: 600,
+      paymentGateway: 900,
+      seo: 500,
+      maintenance: 350,
+    },
+  };
+
+  const planTypeEl = document.getElementById('planType');
+  const pageInputs = Array.from(document.querySelectorAll('input[name="pageCount"]'));
+  const featureInputs = [
+    'ecommerce',
+    'adminDashboard',
+    'userAuth',
+    'paymentGateway',
+    'seo',
+    'maintenance',
+  ].map((id) => document.getElementById(id));
+  const breakdownList = document.getElementById('breakdownList');
+  const totalCostEl = document.getElementById('totalCost');
+
+  function updateCostCalculator() {
+    if (!planTypeEl || !breakdownList || !totalCostEl) return;
+
+    const selectedPlan = planTypeEl.value;
+    const selectedPage = Number(document.querySelector('input[name="pageCount"]:checked').value);
+
+    const breakdown = [];
+    let total = costConfig.base;
+
+    breakdown.push({ label: 'Project setup fee', value: costConfig.base });
+    breakdown.push({ label: `${selectedPlan === 'wordpress' ? 'WordPress site' : 'Custom site'}`, value: costConfig.planType[selectedPlan] });
+    total += costConfig.planType[selectedPlan];
+
+    breakdown.push({ label: `${selectedPage} pages`, value: costConfig.pages[selectedPage] });
+    total += costConfig.pages[selectedPage];
+
+    featureInputs.forEach((input) => {
+      if (input && input.checked) {
+        breakdown.push({ label: `${input.parentElement.textContent.trim()}`, value: costConfig.features[input.id] });
+        total += costConfig.features[input.id];
+      }
+    });
+
+    breakdownList.innerHTML = breakdown
+      .map((item) => `<li><span>${item.label}</span><span>$${item.value.toLocaleString()}</span></li>`)
+      .join('');
+
+    totalCostEl.textContent = `$${total.toLocaleString()}`;
+  }
+
+  if (planTypeEl) planTypeEl.addEventListener('change', updateCostCalculator);
+  pageInputs.forEach((input) => input.addEventListener('change', updateCostCalculator));
+  featureInputs.forEach((input) => input && input.addEventListener('change', updateCostCalculator));
+
+  updateCostCalculator();
 });
 
 form.addEventListener('submit', (e) => {
