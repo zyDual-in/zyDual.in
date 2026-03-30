@@ -479,6 +479,33 @@
 
   <script src="script.js"></script>
 
+  <!-- Live Chat Widget -->
+  <button id="chatLauncher" class="chat-launcher" type="button" aria-label="Open zyDual chat">
+    💬 Chat with zyDual
+  </button>
+
+  <section id="liveChat" class="live-chat" aria-hidden="true">
+    <div class="chat-header">
+      <div>
+        <h3>zyDual Virtual Assistant</h3>
+        <p>Ask anything about our services, pricing, or contact.</p>
+      </div>
+      <button id="chatClose" class="chat-close" type="button" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-body">
+      <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+      <div class="chat-quick-actions">
+        <button type="button" class="chat-quick-action" data-question="What services do you offer?">Services</button>
+        <button type="button" class="chat-quick-action" data-question="How much does a website cost?">Pricing</button>
+        <button type="button" class="chat-quick-action" data-question="How can I contact you?">Contact</button>
+      </div>
+      <form id="chatForm" class="chat-form">
+        <input id="chatInput" type="text" placeholder="Ask about our services, plans, portfolio..." autocomplete="off" />
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  </section>
+
   <!-- WhatsApp Contact Button -->
   <a href="https://wa.me/918072275209?text=Hi%20zyDual,%20I%20would%20like%20to%20discuss%20a%20website%20project" target="_blank" class="whatsapp-btn" aria-label="Contact us on WhatsApp">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

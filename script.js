@@ -187,6 +187,161 @@ window.addEventListener('DOMContentLoaded', () => {
   featureInputs.forEach((input) => input && input.addEventListener('change', updateCostCalculator));
 
   updateCostCalculator();
+
+  // Live chatbot
+  const chatLauncher = document.getElementById('chatLauncher');
+  const liveChat = document.getElementById('liveChat');
+  const chatClose = document.getElementById('chatClose');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatQuickButtons = Array.from(document.querySelectorAll('.chat-quick-action'));
+
+  const serviceNames = Array.from(document.querySelectorAll('.service-card h3')).map((el) => el.textContent.trim());
+  const pricingPlans = Array.from(document.querySelectorAll('.pricing-table .plan-header')).map((el) => {
+    return {
+      name: el.querySelector('.plan-name')?.textContent.trim() || 'Plan',
+      price: el.querySelector('.plan-price')?.textContent.trim() || '',
+    };
+  });
+  const contactDetails = Array.from(document.querySelectorAll('.contact-info ul li')).map((el) => el.textContent.trim());
+  const portfolioProjects = Array.from(document.querySelectorAll('.portfolio-item .overlay h3')).map((el) => el.textContent.trim());
+
+  const chatKnowledge = [
+    {
+      keywords: ['service', 'offer', 'offers', 'provide', 'what do you do'],
+      answer: `We offer ${serviceNames.join(', ')}. Each service is designed to help brands grow online with strategy, design, development and measurable marketing.`,
+    },
+    {
+      keywords: ['web development', 'website development', 'websites', 'custom website', 'apps'],
+      answer: 'We create custom websites and web apps optimized for performance, conversions, and growth. Our work includes responsive builds, CMS sites, e-commerce and landing pages.',
+    },
+    {
+      keywords: ['graphic design', 'design', 'branding'],
+      answer: 'Our graphic design service includes branding, creative asset production and visual systems that elevate your identity across digital touch points.',
+    },
+    {
+      keywords: ['digital marketing', 'marketing', 'campaign'],
+      answer: 'We deliver digital marketing strategy and execution across channels to increase visibility, improve ROI, and grow your audience.',
+    },
+    {
+      keywords: ['seo', 'search engine', 'organic'],
+      answer: 'Our SEO service optimizes your website for search engines with technical, on-page and content improvements to help your brand rank higher organically.',
+    },
+    {
+      keywords: ['dropshipping', 'drop shipping'],
+      answer: 'We help build and optimize dropshipping stores with automation, supplier setup, and user-friendly storefronts to scale your e-commerce business.',
+    },
+    {
+      keywords: ['pricing', 'cost', 'estimate', 'price'],
+      answer: `Our pricing plans include ${pricingPlans.map((plan) => `${plan.name} at ${plan.price}`).join(', ')}. For a tailored quote, use the cost calculator or contact us directly.`,
+    },
+    {
+      keywords: ['calculator', 'estimate', 'cost calculator', 'estimate cost'],
+      answer: 'Use the website cost calculator to choose WordPress or Custom Development, number of pages and extra features. The total updates instantly for a quick quote.',
+    },
+    {
+      keywords: ['portfolio', 'projects', 'work'],
+      answer: `We have completed work like ${portfolioProjects.slice(0, 3).join(', ')} and more. Our portfolio highlights digital, e-commerce, and branding projects.`,
+    },
+    {
+      keywords: ['contact', 'reach', 'email', 'phone', 'location'],
+      answer: `${contactDetails.join(' ')}`,
+    },
+    {
+      keywords: ['about', 'who are you', 'who is zydual', 'company'],
+      answer: 'zyDual is a growth-focused digital consultancy combining strategy, design craftsmanship, and measurable execution for brands that want to scale.',
+    },
+    {
+      keywords: ['process', 'how do you work', 'approach', 'strategy'],
+      answer: 'We start with a strategic roadmap, then execute design and development with growth marketing support, analytics and ongoing optimization.',
+    },
+    {
+      keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon'],
+      answer: 'Hi there! I’m zyDual’s virtual assistant. Ask me about our services, plans, portfolio, or how to get in touch.',
+    },
+  ];
+
+  function normalizeText(text) {
+    return text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function getChatReply(message) {
+    const normalized = normalizeText(message);
+    const matching = chatKnowledge.find((entry) => entry.keywords.every((keyword) => normalized.includes(keyword)));
+    if (matching) return matching.answer;
+
+    const partial = chatKnowledge.find((entry) => entry.keywords.some((keyword) => normalized.includes(keyword)));
+    if (partial) return partial.answer;
+
+    return 'I can help with our services, pricing plans, portfolio highlights, contact details, and how to start your project. Try asking: “What services do you offer?” or “How can I contact zyDual?”.';
+  }
+
+  function scrollChatToBottom() {
+    if (chatMessages) {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+  }
+
+  function appendChatMessage(text, sender = 'bot') {
+    if (!chatMessages) return;
+    const messageElement = document.createElement('div');
+    messageElement.className = `chat-message ${sender}`;
+    messageElement.textContent = text;
+    chatMessages.appendChild(messageElement);
+    scrollChatToBottom();
+  }
+
+  function openChat() {
+    if (!liveChat) return;
+    liveChat.classList.add('active');
+    liveChat.setAttribute('aria-hidden', 'false');
+    if (chatInput) chatInput.focus();
+  }
+
+  function closeChat() {
+    if (!liveChat) return;
+    liveChat.classList.remove('active');
+    liveChat.setAttribute('aria-hidden', 'true');
+  }
+
+  if (chatLauncher) {
+    chatLauncher.addEventListener('click', () => {
+      openChat();
+      if (chatMessages && chatMessages.children.length === 0) {
+        appendChatMessage('Welcome! I’m here to answer questions about zyDual, our services, pricing, and contact options.');
+      }
+    });
+  }
+
+  if (chatClose) {
+    chatClose.addEventListener('click', closeChat);
+  }
+
+  if (chatForm) {
+    chatForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const userMessage = chatInput?.value.trim();
+      if (!userMessage) return;
+      appendChatMessage(userMessage, 'user');
+      const reply = getChatReply(userMessage);
+      setTimeout(() => appendChatMessage(reply, 'bot'), 250);
+      if (chatInput) chatInput.value = '';
+    });
+  }
+
+  chatQuickButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const quickQuery = button.dataset.question;
+      if (!quickQuery) return;
+      if (chatInput) chatInput.value = quickQuery;
+      chatForm?.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeChat();
+  });
 });
 
 form.addEventListener('submit', (e) => {
