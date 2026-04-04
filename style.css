@@ -493,7 +493,7 @@ body::before {
 }
 
 .testimonial-card {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(20px);
   transition: opacity 0.45s ease, transform 0.45s ease;
   border-radius: var(--radius);
@@ -934,7 +934,7 @@ textarea:focus {
 }
 
 .fade-in {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
