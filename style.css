@@ -1157,7 +1157,51 @@ textarea:focus {
   .chat-quick-actions {
     padding: 0.75rem 0.85rem;
   }
+}
 
+@media (max-width: 768px) and (min-width: 521px) {
+  .chat-launcher {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+  }
+
+  .live-chat {
+    width: min(350px, calc(100vw - 2rem));
+    max-height: 480px;
+  }
+
+  .chat-messages {
+    padding: 0.8rem;
+  }
+
+  .chat-message {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .chat-quick-actions {
+    padding: 0 0.8rem 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .chat-quick-action {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .chat-form {
+    padding: 0.7rem 0.8rem 0.9rem;
+  }
+
+  .chat-form input {
+    padding: 0.8rem;
+  }
+
+  .chat-form button {
+    padding: 0.85rem 1rem;
+  }
+}
 
 .fade-in.visible {
   opacity: 1;
