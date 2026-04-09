@@ -1157,7 +1157,7 @@ textarea:focus {
   .chat-quick-actions {
     padding: 0.75rem 0.85rem;
   }
-}
+
 
 @media (max-width: 768px) and (min-width: 521px) {
   .chat-launcher {
