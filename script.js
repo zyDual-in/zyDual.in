@@ -188,14 +188,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
   updateCostCalculator();
 
-  // Live chatbot
-  const chatLauncher = document.getElementById('chatLauncher');
-  const liveChat = document.getElementById('liveChat');
-  const chatClose = document.getElementById('chatClose');
-  const chatMessages = document.getElementById('chatMessages');
-  const chatForm = document.getElementById('chatForm');
-  const chatInput = document.getElementById('chatInput');
-  const chatQuickButtons = Array.from(document.querySelectorAll('.chat-quick-action'));
+  // Live chatbot DOM references are initialized after the markup loads
+  let chatLauncher;
+  let liveChat;
+  let chatClose;
+  let chatMessages;
+  let chatForm;
+  let chatInput;
+  let chatQuickButtons = [];
+
+  chatLauncher = document.getElementById('chatLauncher');
+  liveChat = document.getElementById('liveChat');
+  chatClose = document.getElementById('chatClose');
+  chatMessages = document.getElementById('chatMessages');
+  chatForm = document.getElementById('chatForm');
+  chatInput = document.getElementById('chatInput');
+  chatQuickButtons = Array.from(document.querySelectorAll('.chat-quick-action'));
 
   const serviceNames = Array.from(document.querySelectorAll('.service-card h3')).map((el) => el.textContent.trim());
   const pricingPlans = Array.from(document.querySelectorAll('.pricing-table .plan-header')).map((el) => {

@@ -939,6 +939,7 @@ textarea:focus {
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+/* Live chat widget styles */
 .chat-launcher {
   position: fixed;
   right: 1rem;
@@ -1115,19 +1116,17 @@ textarea:focus {
 
 @media (max-width: 520px) {
   .chat-launcher {
-    left: 0.75rem;
     right: 0.75rem;
-    bottom: 1rem;
+    bottom: 5.5rem;
     width: 50px;
     height: 50px;
     font-size: 1.2rem;
     padding: 0;
   }
-  }
 
   .live-chat {
-    left: 0.75rem;
     right: 0.75rem;
+    left: 0.75rem;
     bottom: 1rem;
     width: auto;
     max-width: calc(100vw - 1.5rem);
@@ -1157,7 +1156,7 @@ textarea:focus {
   .chat-quick-actions {
     padding: 0.75rem 0.85rem;
   }
-
+}
 
 @media (max-width: 768px) and (min-width: 521px) {
   .chat-launcher {
