@@ -26,6 +26,18 @@ body {
   line-height: 1.55;
   scroll-behavior: smooth;
   animation: primaryGradient 20s ease-in-out infinite;
+  min-height: 100vh;
+}
+
+img,
+iframe {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+* {
+  max-width: 100%;
 }
 
 @keyframes primaryGradient {
@@ -349,6 +361,63 @@ body::before {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
   gap: 1.2rem;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.tech-card {
+  padding: 1.4rem;
+  text-align: center;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(34, 211, 238, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.tech-icon {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 1rem;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.tech-html { background: #e34f26; }
+.tech-css { background: #1572b6; }
+.tech-js { background: #f7df1e; color: #111; }
+.tech-react { background: #61dafb; color: #111; }
+.tech-php { background: #777bb3; }
+.tech-laravel { background: #ff2d20; }
+.tech-wordpress { background: #21759b; }
+.tech-shopify { background: #96bf48; color: #111; }
+.tech-node { background: #43853d; }
+.tech-mysql { background: #4479a1; }
+.tech-aws { background: #ff9900; color: #111; }
+.tech-git { background: #f34f29; }
+
+.tech-card h3 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1rem;
 }
 
 .service-card {
@@ -723,26 +792,61 @@ textarea:focus {
 
 .pricing-table {
   width: 100%;
-  border-collapse: collapse;
-  background: rgba(11, 20, 40, 0.68);
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  border-radius: 16px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(8, 14, 28, 0.72);
+  border-radius: 22px;
   overflow: hidden;
-  box-shadow: 0 24px 48px rgba(3, 7, 18, 0.55);
-  backdrop-filter: blur(14px) saturate(1.05);
+  box-shadow: 0 20px 45px rgba(1, 8, 24, 0.45);
+  backdrop-filter: blur(18px);
 }
 
 .pricing-table th,
 .pricing-table td {
-  padding: 1rem;
-  text-align: center;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 1.1rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
 }
 
 .pricing-table th {
-  background: rgba(15, 23, 42, 0.8);
-  font-weight: 600;
-  color: #e2e8f0;
+  background: linear-gradient(120deg, rgba(99, 102, 241, 0.95), rgba(34, 211, 238, 0.95));
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.pricing-table thead th:first-child,
+.pricing-table tbody td:first-child {
+  text-align: left;
+}
+
+.pricing-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pricing-table tbody tr:hover {
+  background: rgba(34, 211, 238, 0.12);
+}
+
+.pricing-table td {
+  color: #dbeafe;
+  vertical-align: top;
+}
+
+.pricing-table td:nth-child(2) {
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.pricing-table td:nth-child(3),
+.pricing-table td:nth-child(4),
+.pricing-table td:nth-child(5) {
+  color: #cbd5e1;
+}
+
+.pricing-table td:last-child {
+  color: #cbd5e1;
 }
 
 .feature-header {
@@ -1237,7 +1341,10 @@ textarea:focus {
 
 @media (max-width: 768px) {
   .section {
-    padding: 3.5rem 0;
+    padding: 3rem 0;
+  }
+  .container {
+    width: min(100%, calc(100vw - 1.5rem));
   }
   .nav-links {
     display: none;
@@ -1245,9 +1352,11 @@ textarea:focus {
     top: 64px;
     left: 0;
     right: 0;
+    bottom: 0;
+    overflow-y: auto;
     flex-direction: column;
     gap: 1rem;
-    background: rgba(15, 23, 42, 0.96);
+    background: rgba(15, 23, 42, 0.98);
     padding: 1.25rem;
     z-index: 1050;
     border-top: 1px solid rgba(148, 163, 184, 0.25);
@@ -1262,24 +1371,45 @@ textarea:focus {
   }
 
   .hero-content {
-    padding-top: 5rem;
+    padding-top: 4.2rem;
   }
 
-  .services .cards {
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .services .cards,
+  .tech-grid,
+  .why-grid,
+  .stats-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    padding: 0.85rem 0.7rem;
   }
 
   .portfolio-item img {
     height: 200px;
   }
+
+  .contact .two-col {
+    display: grid;
+    gap: 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-copy h1 {
-    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
   }
   .hero-copy p {
-    font-size: 1rem;
+    font-size: 0.98rem;
   }
   .hero-cta {
     flex-direction: column;
@@ -1289,62 +1419,40 @@ textarea:focus {
     width: 100%;
     text-align: center;
   }
+  .hero-stats {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
   .about-image img {
-    min-height: 220px;
+    min-height: 200px;
   }
   .portfolio-item img {
     height: 160px;
   }
   .stat-number {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
   }
   .testimonial-card p {
-    font-size: 0.97rem;
+    font-size: 0.95rem;
   }
   .contact .two-col {
     padding: 0 0.7rem;
   }
-}
-
-
-@media (max-width: 768px) {
-  .nav-links {
-    position: fixed;
-    inset: 68px 0 auto;
-    flex-direction: column;
-    gap: 1rem;
-    background: rgba(15, 23, 42, 0.96);
-    padding: 1.25rem;
-    z-index: 1050;
-    border-top: 1px solid rgba(148, 163, 184, 0.25);
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
+  .pricing-table th,
+  .pricing-table td {
+    padding: 0.7rem 0.6rem;
+    font-size: 0.88rem;
   }
-
-  .nav-links.open {
-    transform: translateY(0);
+  .tech-card {
+    padding: 1rem;
   }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .hero-content {
-    padding-top: 5rem;
-  }
-
-  .services .cards {
-    grid-template-columns: 1fr;
-  }
-
-  #hero {
-    padding: 5rem 0 3.5rem;
-  }
-
-  .portfolio-item img {
-    height: 200px;
+  .tech-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1rem;
   }
 }
+
 
 .whatsapp-btn {
   position: fixed;
