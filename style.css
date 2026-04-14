@@ -394,25 +394,15 @@ body::before {
   border-radius: 24px;
   display: grid;
   place-items: center;
-  color: white;
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
-.tech-html { background: #e34f26; }
-.tech-css { background: #1572b6; }
-.tech-js { background: #f7df1e; color: #111; }
-.tech-react { background: #61dafb; color: #111; }
-.tech-php { background: #777bb3; }
-.tech-laravel { background: #ff2d20; }
-.tech-wordpress { background: #21759b; }
-.tech-shopify { background: #96bf48; color: #111; }
-.tech-node { background: #43853d; }
-.tech-mysql { background: #4479a1; }
-.tech-aws { background: #ff9900; color: #111; }
-.tech-git { background: #f34f29; }
+.tech-icon img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
 
 .tech-card h3 {
   margin: 0;
