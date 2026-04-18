@@ -1444,7 +1444,7 @@ textarea:focus {
   }
 
   .hero-slideshow {
-    display: none;
+    /* display: none; */ /* Removed to show slideshow on mobile */
   }
 
   .hero-copy {
@@ -1475,7 +1475,7 @@ textarea:focus {
   }
 
   .portfolio-item img {
-    height: 180px;
+    height: 200px;
   }
 
   .contact .two-col {
@@ -1507,7 +1507,7 @@ textarea:focus {
     min-height: 200px;
   }
   .portfolio-item img {
-    height: 160px;
+    height: 180px;
   }
   .stat-number {
     font-size: 1.75rem;
