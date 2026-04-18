@@ -181,10 +181,12 @@
       </div>
     </section>
 
-    <section id="Plans" class="section fade-in">
+    <section id="Plans" class="section plans-section fade-in">
       <div class="container">
         <h2 class="section-title">Pricing Plans</h2>
         <p class="section-subtitle">Choose the perfect plan for your website development needs.</p>
+
+        <div class="plans-wrapper">
 
         <!-- Website Development Plans -->
         <h3 class="section-subtitle" style="background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; font-size: 1.5rem; margin-bottom: 1rem;">🌐 1) Website Development Plans</h3>
@@ -474,6 +476,7 @@
           <p style="color: #cbd5e1; margin-bottom: 1.5rem;">Get the full details of all our services, pricing, and packages in a comprehensive PDF guide.</p>
           <a href="zyDual-Pricing & Plans.pdf" download style="display: inline-block; background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold; transition: transform 0.2s;">Download PDF Now</a>
         </div>
+        </div>
       </div>
     </section>
 
@@ -541,27 +544,27 @@
         <div class="grid portfolio-grid">
           <article class="portfolio-item">
             <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Project 1" />
-            <div class="overlay"><h3>Brand Redesign</h3><p>Complete visual and user experience overhaul.</p></div>
+            <div class="overlay"><h3>Brand Redesign</h3><p>Complete visual and user experience overhaul.</p><a href="#Portfolio" class="btn btn-primary portfolio-link">View Details</a></div>
           </article>
           <article class="portfolio-item">
             <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" alt="Project 2" />
-            <div class="overlay"><h3>E-commerce UX</h3><p>Conversion-first product journey design.</p></div>
+            <div class="overlay"><h3>E-commerce UX</h3><p>Conversion-first product journey design.</p><a href="#Portfolio" class="btn btn-primary portfolio-link">View Details</a></div>
           </article>
           <article class="portfolio-item">
             <img src="https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=800&q=80" alt="Project 3" />
-            <div class="overlay"><h3>App Launch</h3><p>From concept to market-ready mobile experience.</p></div>
+            <div class="overlay"><h3>App Launch</h3><p>From concept to market-ready mobile experience.</p><a href="#Portfolio" class="btn btn-primary portfolio-link">View Details</a></div>
           </article>
           <article class="portfolio-item">
             <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" alt="Project 4" />
-            <div class="overlay"><h3>Marketing Campaign</h3><p>Lead acquisition through multi-platform strategy.</p></div>
+            <div class="overlay"><h3>Marketing Campaign</h3><p>Lead acquisition through multi-platform strategy.</p><a href="#Portfolio" class="btn btn-primary portfolio-link">View Details</a></div>
           </article>
           <article class="portfolio-item">
             <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Project 5" />
-            <div class="overlay"><h3>Data Analytics</h3><p>Insight-ready dashboards for actionable decisions.</p></div>
+            <div class="overlay"><h3>Data Analytics</h3><p>Insight-ready dashboards for actionable decisions.</p><a href="#Portfolio" class="btn btn-primary portfolio-link">View Details</a></div>
           </article>
           <article class="portfolio-item">
             <img src="https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=80" alt="Project 6" />
-            <div class="overlay"><h3>SEO Makeover</h3><p>Database and technical SEO improvements.</p></div>
+            <div class="overlay"><h3>SEO Makeover</h3><p>Database and technical SEO improvements.</p><a href="#Portfolio" class="btn btn-primary portfolio-link">View Details</a></div>
           </article>
         </div>
       </div>
@@ -577,18 +580,21 @@
             <h3>RealTech IT Academy Website (Hyderabad, Telangana)</h3>
             <p>Designed and developed a modern, responsive website for a Hyderabad-based IT training institute using WordPress. The goal was to improve online presence, showcase courses, and increase student inquiries</p>
             <span>Web App / Data</span>
+            <a href="https://realtechitacademy.com" target="_blank" class="btn btn-secondary project-link">View Project</a>
           </article>
           <article class="project-card glass-card">
             <div class="project-image" style="background-image:url('Vetriarasi.jpeg');"></div>
             <h3>E-commerce Store (Vellore, Tamil Nadu)</h3>
             <p>Developed a full-stack e-commerce web application for a water supply business using HTML, CSS, JavaScript, PHP, and MySQL. The platform includes user authentication, product ordering, admin dashboard, and real-time delivery tracking, providing a complete and user-friendly solution for managing online orders and deliveries.</p>
             <span>Blinkit / Grocery Shop</span>
+            <a href="https://vetriarasi.com" target="_blank" class="btn btn-secondary project-link">View Project</a>
           </article>
           <article class="project-card glass-card">
             <div class="project-image" style="background-image:url('saidha.jpeg');"></div>
             <h3>Jewelry E-commerce Website for Saidah Collections (Apex, NC, USA)</h3>
             <p>Developed a fully functional e-commerce website for a US-based jewelry brand located in Apex, NC, USA using WordPress. The website features product listings, category navigation, a secure shopping cart, and a seamless checkout experience, delivering an elegant and user-friendly online shopping platform.</p>
             <span>Cosmetic / Design</span>
+            <a href="https://saidahcollections.com" target="_blank" class="btn btn-secondary project-link">View Project</a>
           </article>
         </div>
       </div>
@@ -717,7 +723,8 @@
 
   <!-- Live Chat Launcher + Panel -->
   <button id="chatLauncher" class="chat-launcher" type="button" aria-label="Open zyDual chat">
-    💬
+    <span class="chat-text">ASK HELP</span>
+    <span class="chat-icon">💬</span>
   </button>
 
   <section id="liveChat" class="live-chat" aria-hidden="true">

@@ -214,6 +214,26 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   const contactDetails = Array.from(document.querySelectorAll('.contact-info ul li')).map((el) => el.textContent.trim());
   const portfolioProjects = Array.from(document.querySelectorAll('.portfolio-item .overlay h3')).map((el) => el.textContent.trim());
+  const liveProjects = [
+    {
+      name: 'RealTech IT Academy Website',
+      location: 'Hyderabad, Telangana',
+      type: 'WordPress Website',
+      link: 'https://realtechitacademy.com'
+    },
+    {
+      name: 'Vetriarasi E-commerce Store',
+      location: 'Vellore, Tamil Nadu',
+      type: 'Full-stack E-commerce',
+      link: 'https://vetriarasi.com'
+    },
+    {
+      name: 'Saidah Collections Jewelry Website',
+      location: 'Apex, NC, USA',
+      type: 'WordPress E-commerce',
+      link: 'https://saidahcollections.com'
+    }
+  ];
 
   const chatKnowledge = [
     {
@@ -222,51 +242,87 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['web development', 'website development', 'websites', 'custom website', 'apps'],
-      answer: 'We create custom websites and web apps optimized for performance, conversions, and growth. Our work includes responsive builds, CMS sites, e-commerce and landing pages.',
+      answer: 'We create custom websites and web apps optimized for performance, conversions, and growth. Our work includes responsive builds, CMS sites, e-commerce and landing pages using modern technologies like HTML, CSS, JavaScript, React, PHP, Java, WordPress, and more.',
     },
     {
       keywords: ['graphic design', 'design', 'branding'],
-      answer: 'Our graphic design service includes branding, creative asset production and visual systems that elevate your identity across digital touch points.',
+      answer: 'Our graphic design service includes branding, creative asset production and visual systems that elevate your identity across digital touch points. We offer design packs from ₹2,500 for basic branding to ₹35,000 for complete brand identity systems.',
     },
     {
       keywords: ['digital marketing', 'marketing', 'campaign'],
-      answer: 'We deliver digital marketing strategy and execution across channels to increase visibility, improve ROI, and grow your audience.',
+      answer: 'We deliver digital marketing strategy and execution across channels to increase visibility, improve ROI, and grow your audience. Our plans range from ₹7,500/month for starter marketing to ₹50,000/month for performance-focused campaigns.',
     },
     {
       keywords: ['seo', 'search engine', 'organic'],
-      answer: 'Our SEO service optimizes your website for search engines with technical, on-page and content improvements to help your brand rank higher organically.',
+      answer: 'Our SEO service optimizes your website for search engines with technical, on-page and content improvements to help your brand rank higher organically. Plans start from ₹4,999/month for basic SEO to ₹25,000/month for advanced competitive SEO.',
     },
     {
-      keywords: ['dropshipping', 'drop shipping'],
-      answer: 'We help build and optimize dropshipping stores with automation, supplier setup, and user-friendly storefronts to scale your e-commerce business.',
+      keywords: ['dropshipping', 'drop shipping', 'ecommerce', 'e-commerce'],
+      answer: 'We help build and optimize dropshipping stores with automation, supplier setup, and user-friendly storefronts to scale your e-commerce business. Our e-commerce functionality add-on ranges from ₹10,000 to ₹35,000.',
     },
     {
-      keywords: ['pricing', 'cost', 'estimate', 'price'],
-      answer: `Our pricing plans include ${pricingPlans.map((plan) => `${plan.name} at ${plan.price}`).join(', ')}. For a tailored quote, use the cost calculator or contact us directly.`,
+      keywords: ['pricing', 'cost', 'estimate', 'price', 'plans'],
+      answer: `Our pricing includes website development plans from ₹7,500/year for basic sites to ₹25,000/year for corporate solutions. We also offer add-on services like admin dashboards (₹5,000-₹12,000), payment gateways (₹4,000-₹10,000), and maintenance (₹1,500-₹5,000/month). Use our cost calculator for a personalized quote!`,
     },
     {
       keywords: ['calculator', 'estimate', 'cost calculator', 'estimate cost'],
       answer: 'Use the website cost calculator to choose WordPress or Custom Development, number of pages and extra features. The total updates instantly for a quick quote.',
     },
     {
-      keywords: ['portfolio', 'projects', 'work'],
-      answer: `We have completed work like ${portfolioProjects.slice(0, 3).join(', ')} and more. Our portfolio highlights digital, e-commerce, and branding projects.`,
+      keywords: ['portfolio', 'projects', 'work', 'showcase'],
+      answer: `Our portfolio includes ${portfolioProjects.slice(0, 3).join(', ')} and more. We showcase digital transformation, e-commerce solutions, and branding projects that drive real business results.`,
     },
     {
-      keywords: ['contact', 'reach', 'email', 'phone', 'location'],
-      answer: `${contactDetails.join(' ')}`,
+      keywords: ['live projects', 'real projects', 'case studies', 'examples'],
+      answer: `Check out our live projects: ${liveProjects.map(p => `${p.name} (${p.location}) - ${p.type}`).join('; ')}. Each project includes a live demo link - visit our Projects section to explore them!`,
+    },
+    {
+      keywords: ['realtech', 'it academy', 'hyderabad'],
+      answer: 'Our RealTech IT Academy website in Hyderabad features a modern WordPress design with course showcases, responsive layout, and inquiry forms. Visit: https://realtechitacademy.com',
+    },
+    {
+      keywords: ['vetriarasi', 'vellore', 'water supply', 'grocery'],
+      answer: 'The Vetriarasi e-commerce store in Vellore includes full-stack development with user authentication, product ordering, admin dashboard, and real-time delivery tracking. Visit: https://vetriarasi.com',
+    },
+    {
+      keywords: ['saidah', 'jewelry', 'apex', 'usa', 'collections'],
+      answer: 'Saidah Collections jewelry website in Apex, NC, USA features WordPress e-commerce with product listings, secure checkout, and elegant design. Visit: https://saidahcollections.com',
+    },
+    {
+      keywords: ['contact', 'reach', 'email', 'phone', 'location', 'whatsapp'],
+      answer: `${contactDetails.join(' ')} You can also reach us via WhatsApp at +91 8072275209 for quick inquiries.`,
     },
     {
       keywords: ['about', 'who are you', 'who is zydual', 'company'],
-      answer: 'zyDual is a growth-focused digital consultancy combining strategy, design craftsmanship, and measurable execution for brands that want to scale.',
+      answer: 'zyDual is a growth-focused digital consultancy combining strategy, design craftsmanship, and measurable execution for brands that want to scale. We specialize in websites, e-commerce, digital marketing, and complete online solutions.',
     },
     {
       keywords: ['process', 'how do you work', 'approach', 'strategy'],
-      answer: 'We start with a strategic roadmap, then execute design and development with growth marketing support, analytics and ongoing optimization.',
+      answer: 'We start with a strategic roadmap, then execute design and development with growth marketing support, analytics and ongoing optimization. Our process includes consultation, planning, development, testing, launch, and maintenance.',
     },
     {
-      keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon'],
-      answer: 'Hi there! I’m zyDual’s virtual assistant. Ask me about our services, plans, portfolio, or how to get in touch.',
+      keywords: ['technologies', 'tech stack', 'tools', 'frameworks'],
+      answer: 'We work with modern technologies including HTML, CSS, JavaScript, React, PHP, Java, WordPress, Shopify, Node.js, MySQL, AWS, and Git. Our tech stack ensures high-performance, scalable solutions.',
+    },
+    {
+      keywords: ['maintenance', 'support', 'updates', 'ongoing'],
+      answer: 'We provide website maintenance from ₹1,500-₹5,000/month including updates, fixes, support, monitoring, and content changes. Speed optimization is also available for ₹2,000-₹6,000.',
+    },
+    {
+      keywords: ['payment', 'gateway', 'razorpay', 'stripe', 'paypal'],
+      answer: 'We integrate payment gateways like Razorpay, Stripe, PayPal, and UPI for secure online transactions. Integration costs range from ₹4,000-₹10,000 depending on complexity.',
+    },
+    {
+      keywords: ['admin dashboard', 'backend', 'cms', 'management'],
+      answer: 'Our admin dashboards allow you to manage website content, forms, users, or products from a backend panel. Perfect for content updates without technical knowledge. Pricing: ₹5,000-₹12,000.',
+    },
+    {
+      keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'greetings'],
+      answer: 'Hi there! I\'m zyDual\'s virtual assistant. Ask me about our services, live projects, pricing plans, portfolio, or how to get in touch. I\'m here to help you grow your business online!',
+    },
+    {
+      keywords: ['thank you', 'thanks', 'appreciate'],
+      answer: 'You\'re welcome! Feel free to ask if you have any more questions about our services or need help getting started with your project.',
     },
   ];
 
