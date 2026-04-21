@@ -62,9 +62,9 @@ body::before {
   animation: twinkleFade 12s ease-in-out infinite;
 }
 
-@keyframes twinkleFade {
-  0%, 100% { opacity: 0.14; }
-  50% { opacity: 0.05; }
+@keyframes chatPulse {
+  0%, 100% { box-shadow: 0 20px 45px rgba(45, 209, 255, 0.24); }
+  50% { box-shadow: 0 20px 45px rgba(45, 209, 255, 0.4), 0 0 20px rgba(45, 209, 255, 0.2); }
 }
 .hero-bg {
   background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.4), rgba(34, 211, 238, 0.16), rgba(6, 11, 26, 0.96));
@@ -1113,6 +1113,7 @@ textarea:focus {
   box-shadow: 0 20px 45px rgba(45, 209, 255, 0.24);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 0 1rem;
+  animation: chatPulse 3s ease-in-out infinite;
 }
 
 .chat-launcher .chat-text {
