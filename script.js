@@ -118,6 +118,31 @@ window.addEventListener('DOMContentLoaded', () => {
 
   showTestimonial(0);
 
+  // Portfolio filters
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+  function filterPortfolio(filter) {
+    portfolioItems.forEach(item => {
+      const category = item.dataset.category;
+      if (filter === 'all' || category === filter) {
+        item.style.display = 'block';
+        setTimeout(() => item.style.opacity = '1', 10);
+      } else {
+        item.style.opacity = '0';
+        setTimeout(() => item.style.display = 'none', 300);
+      }
+    });
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      filterPortfolio(button.dataset.filter);
+    });
+  });
+
   let testimonialIndex = 0;
   setInterval(() => {
     testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
@@ -126,16 +151,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Website cost calculator
   const costConfig = {
-    base: 5000, // 400 USD
-    planType: { wordpress: 5000, custom: 12000 }, // 1200 USD
-    pages: { 5: 1500, 10: 4700, 15: 7900 }, // 500, 900, 1300 USD
+    base: 7500, // Base price for basic plan
+    planType: { wordpress: 0, custom: 12000 }, // Custom adds extra
+    pages: { 5: 7800, 10: 12000, 15: 17000 }, // Page additions - keeping as is for flexibility
     features: {
-      ecommerce: 9600, // 1200 USD
-      adminDashboard: 1400, // 800 USD
-      userAuth: 9800, // 600 USD
-      paymentGateway: 5000, // 900 USD
-      seo: 1999, // 500 USD
-      maintenance: 3000, // 350 USD
+      ecommerce: 10000, // E-commerce functionality
+      adminDashboard: 5000, // Admin dashboard
+      userAuth: 3000, // User authentication
+      paymentGateway: 4000, // Payment gateway
+      seo: 3000, // SEO optimization
+      maintenance: 1500, // Maintenance
     },
   };
 
@@ -187,6 +212,31 @@ window.addEventListener('DOMContentLoaded', () => {
   featureInputs.forEach((input) => input && input.addEventListener('change', updateCostCalculator));
 
   updateCostCalculator();
+
+  const pricingToggleButtons = Array.from(document.querySelectorAll('.pricing-pill'));
+  const pricingCardPrices = Array.from(document.querySelectorAll('.pricing-card-price'));
+
+  function updatePricingMode(mode) {
+    pricingToggleButtons.forEach((button) => {
+      button.classList.toggle('active', button.dataset.pricingMode === mode);
+    });
+
+    pricingCardPrices.forEach((priceBlock) => {
+      const value = mode === 'monthly' ? priceBlock.dataset.monthly : priceBlock.dataset.oneTime;
+      const valueEl = priceBlock.querySelector('.pricing-card-price-value');
+      if (valueEl && value) {
+        valueEl.textContent = value;
+      }
+    });
+  }
+
+  pricingToggleButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      updatePricingMode(button.dataset.pricingMode);
+    });
+  });
+
+  updatePricingMode('one-time');
 
   // Live chatbot DOM references are initialized after the markup loads
   let chatLauncher;
