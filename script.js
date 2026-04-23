@@ -176,6 +176,9 @@ window.addEventListener('DOMContentLoaded', () => {
   ].map((id) => document.getElementById(id));
   const breakdownList = document.getElementById('breakdownList');
   const totalCostEl = document.getElementById('totalCost');
+  const estimateOverview = document.getElementById('estimateOverview');
+  const heroPricingValue = document.getElementById('heroPricingValue');
+  const heroPricingSubtitle = document.getElementById('heroPricingSubtitle');
 
   function updateCostCalculator() {
     if (!planTypeEl || !breakdownList || !totalCostEl) return;
@@ -205,6 +208,16 @@ window.addEventListener('DOMContentLoaded', () => {
       .join('');
 
     totalCostEl.textContent = `₹${total.toLocaleString()}`;
+
+    if (estimateOverview) {
+      const planLabel = selectedPlan === 'wordpress' ? 'WordPress site' : 'Custom website';
+      const selectedFeatures = featureInputs
+        .filter((input) => input && input.checked)
+        .map((input) => input.parentElement.textContent.trim())
+        .join(', ') || 'No extra features selected';
+
+      estimateOverview.textContent = `Live estimate for ${planLabel}, ${selectedPage} pages, plus ${selectedFeatures}. Final quote will be tailored after discovery.`;
+    }
   }
 
   if (planTypeEl) planTypeEl.addEventListener('change', updateCostCalculator);
@@ -215,6 +228,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const pricingToggleButtons = Array.from(document.querySelectorAll('.pricing-pill'));
   const pricingCardPrices = Array.from(document.querySelectorAll('.pricing-card-price'));
+
+  function updateHeroPricingSummary(mode) {
+    if (!heroPricingValue || !heroPricingSubtitle) return;
+    if (mode === 'monthly') {
+      heroPricingValue.textContent = '₹15,500 / month';
+      heroPricingSubtitle.textContent = 'Flexible monthly payment for teams growing fast.';
+    } else {
+      heroPricingValue.textContent = '₹15,500 / year';
+      heroPricingSubtitle.textContent = 'One-time payment with full launch support included.';
+    }
+  }
 
   function updatePricingMode(mode) {
     pricingToggleButtons.forEach((button) => {
@@ -228,6 +252,8 @@ window.addEventListener('DOMContentLoaded', () => {
         valueEl.textContent = value;
       }
     });
+
+    updateHeroPricingSummary(mode);
   }
 
   pricingToggleButtons.forEach((button) => {
