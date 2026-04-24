@@ -21,9 +21,10 @@
       <nav class="nav-links" id="navLinks">
         <a href="#hero" class="nav-item active">Home</a>
         <a href="#About" class="nav-item">About</a>
-        <a href="#Plans" class="nav-item">Plans</a>
-        <a href="#Docs" class="nav-item">Cost Estimator</a>
         <a href="#Services" class="nav-item">Services</a>
+        <a href="#Estimator" class="nav-item">Cost Estimator</a>
+        <a href="#Plans" class="nav-item">Plans</a>
+        <a href="#Docs" class="nav-item">Docs</a>
         <a href="#Portfolio" class="nav-item">Portfolio</a>
         <a href="#Stats" class="nav-item">Stats</a>
         <a href="#Testimonials" class="nav-item">Testimonials</a>
@@ -120,6 +121,329 @@
             <h3>Dropshipping</h3>
             <p>Full dropshipping store setup, automation, and supplier network optimization.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cost Estimator Section -->
+    <section id="Estimator" class="section cost-estimator-section fade-in">
+      <div class="container">
+        <h2 class="section-title">Cost Estimator</h2>
+        <p class="section-subtitle">Build your custom package and see real-time cost calculations.</p>
+
+        <div class="estimator-layout">
+          <!-- LEFT COLUMN: Selectable Options -->
+          <div class="estimator-options">
+            <!-- Billing Toggle -->
+            <div class="estimator-billing-toggle">
+              <span class="billing-label">Billing:</span>
+              <div class="billing-switch">
+                <button type="button" class="billing-btn active" data-billing="one-time">One-Time</button>
+                <button type="button" class="billing-btn" data-billing="monthly">Monthly</button>
+              </div>
+            </div>
+
+            <!-- Accordion Sections -->
+            <div class="estimator-accordions">
+              <!-- 1) Website Development Plans -->
+              <div class="estimator-accordion">
+                <button class="accordion-header" type="button">
+                  <span class="accordion-number">1</span>
+                  <span class="accordion-title">Website Development Plans</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-content">
+                  <div class="plan-options radio-group">
+                    <label class="plan-option">
+                      <input type="radio" name="website-plan" value="basic" data-price="7500" data-label="Basic Plan">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Basic Plan</span>
+                        <span class="plan-desc">Students, freelancers, small local businesses</span>
+                        <span class="plan-price">₹7,500 / year</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="website-plan" value="standard" data-price="15500" data-label="Standard Plan" checked>
+                      <span class="plan-option-content">
+                        <span class="plan-name">Standard Plan</span>
+                        <span class="plan-desc">Startups, consultants, service businesses</span>
+                        <span class="plan-price">₹15,500 / year</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="website-plan" value="business" data-price="19500" data-label="Business Plan">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Business Plan</span>
+                        <span class="plan-desc">Growing businesses</span>
+                        <span class="plan-price">₹19,500 / year</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="website-plan" value="corporate" data-price="25000" data-label="Corporate Plan">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Corporate Plan</span>
+                        <span class="plan-desc">Companies, institutions, larger brands</span>
+                        <span class="plan-price">₹25,000 / year</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2) Website Add-On Services -->
+              <div class="estimator-accordion">
+                <button class="accordion-header" type="button">
+                  <span class="accordion-number">2</span>
+                  <span class="accordion-title">Website Add-On Services</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-content">
+                  <div class="plan-options checkbox-group">
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="admin-dashboard" data-price="5000" data-label="Admin Dashboard">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Admin Dashboard</span>
+                        <span class="plan-price">₹5,000 – ₹12,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="user-auth" data-price="3000" data-label="User Login / Authentication">
+                      <span class="plan-option-content">
+                        <span class="plan-name">User Login / Authentication</span>
+                        <span class="plan-price">₹3,000 – ₹8,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="payment-gateway" data-price="4000" data-label="Payment Gateway Integration">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Payment Gateway Integration</span>
+                        <span class="plan-price">₹4,000 – ₹10,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="ecommerce" data-price="10000" data-label="E-commerce Functionality">
+                      <span class="plan-option-content">
+                        <span class="plan-name">E-commerce Functionality</span>
+                        <span class="plan-price">₹10,000 – ₹35,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="seo-setup" data-price="3000" data-label="SEO Setup (Basic)">
+                      <span class="plan-option-content">
+                        <span class="plan-name">SEO Setup (Basic)</span>
+                        <span class="plan-price">₹3,000 – ₹8,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="maintenance" data-price="1500" data-label="Website Maintenance" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Website Maintenance</span>
+                        <span class="plan-price">₹1,500 – ₹5,000 / month</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="speed-optimization" data-price="2000" data-label="Speed Optimization">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Speed Optimization</span>
+                        <span class="plan-price">₹2,000 – ₹6,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="checkbox" name="addon" value="additional-page" data-price="500" data-label="Additional Page" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Additional Page</span>
+                        <span class="plan-price">₹500 – ₹1,500 / page</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3) Graphic Design Plans -->
+              <div class="estimator-accordion">
+                <button class="accordion-header" type="button">
+                  <span class="accordion-number">3</span>
+                  <span class="accordion-title">Graphic Design Plans</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-content">
+                  <div class="plan-options radio-group">
+                    <label class="plan-option">
+                      <input type="radio" name="design-plan" value="starter" data-price="2500" data-label="Starter Design Pack">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Starter Design Pack</span>
+                        <span class="plan-desc">New businesses and personal brands</span>
+                        <span class="plan-price">₹2,500 – ₹5,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="design-plan" value="business" data-price="6000" data-label="Business Design Pack">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Business Design Pack</span>
+                        <span class="plan-desc">Growing businesses</span>
+                        <span class="plan-price">₹6,000 – ₹12,000</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="design-plan" value="brand" data-price="15000" data-label="Brand Identity Pack">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Brand Identity Pack</span>
+                        <span class="plan-desc">Serious brands and startups</span>
+                        <span class="plan-price">₹15,000 – ₹35,000</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4) SEO Plans -->
+              <div class="estimator-accordion">
+                <button class="accordion-header" type="button">
+                  <span class="accordion-number">4</span>
+                  <span class="accordion-title">SEO Plans</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-content">
+                  <div class="plan-options radio-group">
+                    <label class="plan-option">
+                      <input type="radio" name="seo-plan" value="basic" data-price="4999" data-label="Basic SEO" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Basic SEO</span>
+                        <span class="plan-desc">Small businesses and local websites</span>
+                        <span class="plan-price">₹4,999 / month</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="seo-plan" value="growth" data-price="9999" data-label="Growth SEO" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Growth SEO</span>
+                        <span class="plan-desc">Businesses looking for organic growth</span>
+                        <span class="plan-price">₹9,999 / month</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="seo-plan" value="advanced" data-price="15000" data-label="Advanced SEO" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Advanced SEO</span>
+                        <span class="plan-desc">Competitive businesses and serious scaling</span>
+                        <span class="plan-price">₹15,000 – ₹25,000 / month</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5) Digital Marketing Plans -->
+              <div class="estimator-accordion">
+                <button class="accordion-header" type="button">
+                  <span class="accordion-number">5</span>
+                  <span class="accordion-title">Digital Marketing Plans</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-content">
+                  <div class="plan-options radio-group">
+                    <label class="plan-option">
+                      <input type="radio" name="marketing-plan" value="starter" data-price="7500" data-label="Starter Marketing Plan" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Starter Marketing Plan</span>
+                        <span class="plan-desc">Small businesses testing digital growth</span>
+                        <span class="plan-price">₹7,500 / month</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="marketing-plan" value="growth" data-price="15000" data-label="Growth Marketing Plan" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Growth Marketing Plan</span>
+                        <span class="plan-desc">Businesses needing regular lead generation</span>
+                        <span class="plan-price">₹15,000 / month</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="marketing-plan" value="performance" data-price="25000" data-label="Performance Marketing Plan" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Performance Marketing Plan</span>
+                        <span class="plan-desc">Brands focused on scaling and ROI</span>
+                        <span class="plan-price">₹25,000 – ₹50,000 / month</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6) Business Growth / Consulting Plans -->
+              <div class="estimator-accordion">
+                <button class="accordion-header" type="button">
+                  <span class="accordion-number">6</span>
+                  <span class="accordion-title">Business Growth / Consulting Plans</span>
+                  <span class="accordion-icon">▼</span>
+                </button>
+                <div class="accordion-content">
+                  <div class="plan-options radio-group">
+                    <label class="plan-option">
+                      <input type="radio" name="consulting-plan" value="consultation" data-price="999" data-label="Consultation Call">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Consultation Call</span>
+                        <span class="plan-desc">Quick guidance and business advice</span>
+                        <span class="plan-price">₹999 – ₹2,500 / session</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="consulting-plan" value="growth" data-price="5000" data-label="Growth Consulting Package" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Growth Consulting Package</span>
+                        <span class="plan-desc">Businesses looking for structured improvement</span>
+                        <span class="plan-price">₹5,000 – ₹15,000 / month</span>
+                      </span>
+                    </label>
+                    <label class="plan-option">
+                      <input type="radio" name="consulting-plan" value="premium" data-price="20000" data-label="Premium Growth Advisory" data-monthly="true">
+                      <span class="plan-option-content">
+                        <span class="plan-name">Premium Growth Advisory</span>
+                        <span class="plan-desc">Companies serious about business scaling</span>
+                        <span class="plan-price">₹20,000+ / month</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Sticky Summary Panel -->
+          <div class="estimator-summary">
+            <div class="summary-card glass-card">
+              <h3>Your Quote</h3>
+              <p class="summary-subtitle">Real-time cost calculation</p>
+
+              <div class="summary-toggle">
+                <button type="button" class="summary-view-btn active" data-view="monthly">Monthly</button>
+                <button type="button" class="summary-view-btn" data-view="yearly">Yearly</button>
+              </div>
+
+              <div class="summary-items">
+                <div class="summary-section">
+                  <h4>Selected Plans</h4>
+                  <ul class="summary-list" id="selectedPlans">
+                    <li class="empty-item">No plan selected</li>
+                  </ul>
+                </div>
+                <div class="summary-section">
+                  <h4>Add-On Services</h4>
+                  <ul class="summary-list" id="selectedAddons">
+                    <li class="empty-item">No add-ons selected</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="summary-total">
+                <div class="total-label">Total Cost</div>
+                <div class="total-amount" id="totalAmount">₹0</div>
+                <div class="total-period" id="totalPeriod">per month</div>
+              </div>
+
+              <a href="#Contact" class="btn btn-primary summary-cta">Book a free review</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -592,70 +916,18 @@
       </div>
     </section>
 
+   
+
     <section id="Docs" class="section fade-in">
       <div class="container">
-        <h2 class="section-title">Company Docs & Cost Estimator</h2>
-        <p class="section-subtitle">Explore our company profile and calculate your website cost instantly.</p>
+        <h2 class="section-title">Company Docs</h2>
+        <p class="section-subtitle">Explore our company profile and documentation.</p>
 
-        <div class="company-docs-layout">
-          <div class="glass-card docs-preview">
-            <h3>Document Preview</h3>
-            <p>Browse the embedded company profile directly on the page.</p>
-            <iframe id="pdfPreview" src="zyDual.pdf" title="Company PDF Preview"></iframe>
-            <p style="margin-top:0.75rem; color:#cbd5e1; font-size:0.95rem;">Tip: scroll inside the frame to move slides/pages.</p>
-          </div>
-
-          <div class="glass-card cost-calculator">
-            <h3><b><i>Website Cost Calculator</b></i></h3>
-            <p>Select options below and see the breakdown update instantly.</p>
-
-            <div class="calculator-form">
-              <div class="form-group">
-                <label for="planType">Website Type</label>
-                <select id="planType" class="modern-select">
-                  <option value="wordpress">WordPress</option>
-                  <option value="custom">Custom Development</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Number of Pages</label>
-                <div class="option-group radio-group">
-                  <label class="radio-label"><input type="radio" name="pageCount" value="5" checked> <span>5 pages</span></label>
-                  <label class="radio-label"><input type="radio" name="pageCount" value="10"> <span>10 pages</span></label>
-                  <label class="radio-label"><input type="radio" name="pageCount" value="15"> <span>15+ pages</span></label>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Extra Features</label>
-                <div class="option-group checkbox-group">
-                  <label class="checkbox-label"><input type="checkbox" id="ecommerce" value="ecommerce"> <span>E-commerce functionality</span></label>
-                  <label class="checkbox-label"><input type="checkbox" id="adminDashboard" value="adminDashboard"> <span>Admin dashboard</span></label>
-                  <label class="checkbox-label"><input type="checkbox" id="userAuth" value="userAuth"> <span>User authentication (login/register)</span></label>
-                  <label class="checkbox-label"><input type="checkbox" id="paymentGateway" value="paymentGateway"> <span>Payment gateway integration</span></label>
-                  <label class="checkbox-label"><input type="checkbox" id="seo" value="seo"> <span>SEO optimization</span></label>
-                  <label class="checkbox-label"><input type="checkbox" id="maintenance" value="maintenance"> <span>Maintenance/support plan</span></label>
-                </div>
-              </div>
-            </div>
-
-            <div class="calculator-summary">
-              <strong>Estimate summary</strong>
-              <p id="estimateOverview">Select your site type, page count, and add-ons to see the live estimate update instantly.</p>
-            </div>
-
-            <div class="breakdown-box">
-              <h4>Feature-based Breakdown</h4>
-              <ul id="breakdownList"></ul>
-            </div>
-
-            <div class="total-box">
-              <h4>Total Estimate</h4>
-              <p id="totalCost">₹0</p>
-              <small>Estimated cost; final quote provided after discovery call.</small>
-            </div>
-          </div>
+        <div class="docs-preview glass-card">
+          <h3>Document Preview</h3>
+          <p>Browse the embedded company profile directly on the page.</p>
+          <iframe id="pdfPreview" src="zyDual.pdf" title="Company PDF Preview"></iframe>
+          <p style="margin-top:0.75rem; color:#cbd5e1; font-size:0.95rem;">Tip: scroll inside the frame to move slides/pages.</p>
         </div>
       </div>
     </section>
@@ -900,7 +1172,7 @@
       </div>
       <div class="footer-social">
         <a href="#" aria-label="Twitter">🐦</a>
-        <a href="#" aria-label="LinkedIn">💼</a>
+        <a href="#" aria-label="LinkedIn">💼</a>q
         <a href="#" aria-label="Instagram">📷</a>
       </div>
     </div>

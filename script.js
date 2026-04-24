@@ -508,3 +508,163 @@ form.addEventListener('submit', (e) => {
 
   form.reset();
 });
+
+/* ========================================
+   COST ESTIMATOR FUNCTIONALITY
+   ======================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // DOM Elements
+  const billingBtns = document.querySelectorAll('.billing-btn');
+  const summaryViewBtns = document.querySelectorAll('.summary-view-btn');
+  const accordions = document.querySelectorAll('.estimator-accordion');
+  const planInputs = document.querySelectorAll('.estimator-options input[type="radio"], .estimator-options input[type="checkbox"]');
+  const selectedPlansList = document.getElementById('selectedPlans');
+  const selectedAddonsList = document.getElementById('selectedAddons');
+  const totalAmountEl = document.getElementById('totalAmount');
+  const totalPeriodEl = document.getElementById('totalPeriod');
+
+  // State
+  let billingMode = 'one-time'; // 'one-time' or 'monthly'
+  let summaryView = 'monthly'; // 'monthly' or 'yearly'
+
+  // Initialize first accordion as open
+  if (accordions.length > 0) {
+    accordions[0].classList.add('open');
+  }
+
+  // Accordion toggle
+  accordions.forEach(accordion => {
+    const header = accordion.querySelector('.accordion-header');
+    header.addEventListener('click', () => {
+      accordions.forEach(acc => {
+        if (acc !== accordion) acc.classList.remove('open');
+      });
+      accordion.classList.toggle('open');
+    });
+  });
+
+  // Billing toggle
+  billingBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      billingBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      billingMode = btn.dataset.billing;
+      updateCalculation();
+    });
+  });
+
+  // Summary view toggle
+  summaryViewBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      summaryViewBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      summaryView = btn.dataset.view;
+      updateCalculation();
+    });
+  });
+
+  // Plan/Add-on selection
+  planInputs.forEach(input => {
+    input.addEventListener('change', updateCalculation);
+  });
+
+  // Main calculation function
+  function updateCalculation() {
+    const selectedPlans = [];
+    const selectedAddons = [];
+    let monthlyTotal = 0;
+    let yearlyTotal = 0;
+
+    // Get all selected radio groups (plans)
+    const planGroups = document.querySelectorAll('.radio-group');
+    planGroups.forEach(group => {
+      const checked = group.querySelector('input:checked');
+      if (checked) {
+        const label = checked.dataset.label;
+        const price = parseInt(checked.dataset.price) || 0;
+        const isMonthly = checked.dataset.monthly === 'true';
+
+        selectedPlans.push({ label, price, isMonthly });
+
+        if (isMonthly) {
+          monthlyTotal += price;
+          yearlyTotal += price * 12;
+        } else {
+          yearlyTotal += price;
+        }
+      }
+    });
+
+    // Get all selected checkboxes (add-ons)
+    const checkboxGroups = document.querySelectorAll('.checkbox-group');
+    checkboxGroups.forEach(group => {
+      const checkedItems = group.querySelectorAll('input:checked');
+      checkedItems.forEach(checked => {
+        const label = checked.dataset.label;
+        const price = parseInt(checked.dataset.price) || 0;
+        const isMonthly = checked.dataset.monthly === 'true';
+
+        selectedAddons.push({ label, price, isMonthly });
+
+        if (isMonthly) {
+          monthlyTotal += price;
+          yearlyTotal += price * 12;
+        } else {
+          yearlyTotal += price;
+        }
+      });
+    });
+
+    // Update UI
+    renderSelectedItems(selectedPlans, selectedAddons);
+    renderTotal(monthlyTotal, yearlyTotal);
+  }
+
+  // Render selected items to summary
+  function renderSelectedItems(plans, addons) {
+    // Plans
+    if (plans.length === 0) {
+      selectedPlansList.innerHTML = '<li class="empty-item">No plan selected</li>';
+    } else {
+      selectedPlansList.innerHTML = plans.map(plan => `
+        <li>
+          <span>${plan.label}</span>
+          <span class="item-price">₹${plan.price.toLocaleString()}</span>
+        </li>
+      `).join('');
+    }
+
+    // Add-ons
+    if (addons.length === 0) {
+      selectedAddonsList.innerHTML = '<li class="empty-item">No add-ons selected</li>';
+    } else {
+      selectedAddonsList.innerHTML = addons.map(addon => `
+        <li>
+          <span>${addon.label}</span>
+          <span class="item-price">₹${addon.price.toLocaleString()}</span>
+        </li>
+      `).join('');
+    }
+  }
+
+  // Render total amount
+  function renderTotal(monthly, yearly) {
+    let displayAmount;
+    let displayPeriod;
+
+    if (summaryView === 'monthly') {
+      displayAmount = monthly;
+      displayPeriod = 'per month';
+    } else {
+      displayAmount = yearly;
+      displayPeriod = 'per year';
+    }
+
+    totalAmountEl.textContent = `₹${displayAmount.toLocaleString()}`;
+    totalPeriodEl.textContent = displayPeriod;
+  }
+
+  // Initial calculation
+  updateCalculation();
+});
