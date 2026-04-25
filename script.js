@@ -668,3 +668,331 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial calculation
   updateCalculation();
 });
+
+// Invoice Generator Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const generateInvoiceBtn = document.getElementById('generateInvoiceBtn');
+  
+  if (generateInvoiceBtn) {
+    generateInvoiceBtn.addEventListener('click', generateInvoice);
+  }
+  
+  function generateInvoice() {
+    // Get selected plans and addons from the summary
+    const selectedPlansList = document.getElementById('selectedPlans');
+    const selectedAddonsList = document.getElementById('selectedAddons');
+    const totalAmountEl = document.getElementById('totalAmount');
+    const totalPeriodEl = document.getElementById('totalPeriod');
+    
+    if (!selectedPlansList || !totalAmountEl) {
+      alert('Please select services from the Cost Estimator first.');
+      return;
+    }
+    
+    // Extract selected items
+    const plans = [];
+    const addons = [];
+    
+    if (selectedPlansList) {
+      selectedPlansList.querySelectorAll('li:not(.empty-item)').forEach(item => {
+        plans.push(item.textContent);
+      });
+    }
+    
+    if (selectedAddonsList) {
+      selectedAddonsList.querySelectorAll('li:not(.empty-item)').forEach(item => {
+        addons.push(item.textContent);
+      });
+    }
+    
+    const totalAmount = totalAmountEl.textContent;
+    const billingPeriod = totalPeriodEl.textContent;
+    
+    // Generate invoice HTML
+    const invoiceHTML = generateInvoiceContent(plans, addons, totalAmount, billingPeriod);
+    
+    // Open invoice in new window
+    const invoiceWindow = window.open('', '_blank', 'width=800,height=900');
+    invoiceWindow.document.write(invoiceHTML);
+    invoiceWindow.document.close();
+  }
+  
+  function generateInvoiceContent(plans, addons, totalAmount, billingPeriod) {
+    const today = new Date();
+    const invoiceNumber = 'INV-' + Date.now().toString().slice(-8);
+    const dueDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+    
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice - zyDual</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; }
+    .invoice-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+    .invoice-header { background: linear-gradient(135deg, #7c3aed, #2dd4bf); color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
+    .invoice-header h1 { font-size: 2rem; margin-bottom: 5px; }
+    .invoice-header .invoice-number { font-size: 1.1rem; opacity: 0.9; }
+    .invoice-body { padding: 30px; }
+    .company-info, .client-info { margin-bottom: 30px; }
+    .company-info h3, .client-info h3 { color: #7c3aed; margin-bottom: 10px; font-size: 1.1rem; }
+    .company-info p, .client-info p { color: #666; line-height: 1.8; }
+    .invoice-table { width: 100%; border-collapse: collapse; margin: 30px 0; }
+    .invoice-table th { background: #f8f9fa; padding: 15px; text-align: left; font-weight: 600; color: #333; border-bottom: 2px solid #7c3aed; }
+    .invoice-table td { padding: 15px; border-bottom: 1px solid #eee; }
+    .invoice-table tr:last-child td { border-bottom: none; }
+    .invoice-table .amount { text-align: right; font-weight: 600; }
+    .invoice-total { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: right; }
+    .invoice-total .total-label { font-size: 1.1rem; color: #666; }
+    .invoice-total .total-amount { font-size: 2rem; font-weight: 700; color: #7c3aed; }
+    .invoice-footer { background: #1e1e2e; color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+    .invoice-footer p { font-size: 0.9rem; opacity: 0.8; }
+    .print-btn { background: #7c3aed; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+    .print-btn:hover { background: #6d28d9; }
+    @media print { body { padding: 0; } .invoice-container { box-shadow: none; } .print-btn { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="invoice-container">
+    <div class="invoice-header">
+      <div>
+        <h1>zyDual</h1>
+        <p>IT & Digital Service Company</p>
+      </div>
+      <div style="text-align: right;">
+        <div class="invoice-number">Invoice #${invoiceNumber}</div>
+        <p>Date: ${today.toLocaleDateString()}</p>
+        <p>Due: ${dueDate.toLocaleDateString()}</p>
+      </div>
+    </div>
+    
+    <div class="invoice-body">
+      <div style="display: flex; gap: 40px;">
+        <div class="company-info">
+          <h3>From:</h3>
+          <p><strong>zyDual</strong><br>
+          Thudiyalur road near KGISL campus<br>
+          saravanampatti, coimbatore<br>
+          TamilNadu, India<br>
+          Email: zydual.in@gmail.com<br>
+          Phone: +91 8072275209</p>
+        </div>
+        <div class="client-info">
+          <h3>Bill To:</h3>
+          <p><strong>Customer</strong><br>
+          [Customer details will be collected]<br>
+          <br>
+          Thank you for choosing zyDual!</p>
+        </div>
+      </div>
+      
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Type</th>
+            <th class="amount">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${plans.length > 0 ? plans.map(plan => `
+          <tr>
+            <td>${plan}</td>
+            <td>Plan</td>
+            <td class="amount">Included</td>
+          </tr>`).join('') : '<tr><td colspan="3">No plans selected</td></tr>'}
+          ${addons.length > 0 ? addons.map(addon => `
+          <tr>
+            <td>${addon}</td>
+            <td>Add-on</td>
+            <td class="amount">Included</td>
+          </tr>`).join('') : ''}
+        </tbody>
+      </table>
+      
+      <div class="invoice-total">
+        <div class="total-label">Total Amount (${billingPeriod})</div>
+        <div class="total-amount">${totalAmount}</div>
+      </div>
+    </div>
+    
+    <div class="invoice-footer">
+      <div>
+        <p>Thank you for your business!</p>
+        <p>Payment due within 7 days</p>
+      </div>
+      <button class="print-btn" onclick="window.print()">Print Invoice</button>
+    </div>
+  </div>
+</body>
+</html>`;
+  }
+});
+
+// Testimonials Carousel & Portfolio Modal
+document.addEventListener('DOMContentLoaded', function() {
+  // Testimonials Carousel
+  const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+  const testimonialDots = document.querySelectorAll('.testimonial-dots .dot');
+  const carouselPrev = document.querySelector('.carousel-arrow.prev');
+  const carouselNext = document.querySelector('.carousel-arrow.next');
+  let currentTestimonial = 0;
+  
+  function showTestimonialSlide(index) {
+    testimonialSlides.forEach(slide => slide.classList.remove('active'));
+    testimonialDots.forEach(dot => dot.classList.remove('active'));
+    
+    if (testimonialSlides[index]) {
+      testimonialSlides[index].classList.add('active');
+    }
+    if (testimonialDots[index]) {
+      testimonialDots[index].classList.add('active');
+    }
+    currentTestimonial = index;
+  }
+  
+  if (testimonialDots.length > 0) {
+    testimonialDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showTestimonialSlide(index));
+    });
+  }
+  
+  if (carouselPrev) {
+    carouselPrev.addEventListener('click', () => {
+      const newIndex = currentTestimonial > 0 ? currentTestimonial - 1 : testimonialSlides.length - 1;
+      showTestimonialSlide(newIndex);
+    });
+  }
+  
+  if (carouselNext) {
+    carouselNext.addEventListener('click', () => {
+      const newIndex = currentTestimonial < testimonialSlides.length - 1 ? currentTestimonial + 1 : 0;
+      showTestimonialSlide(newIndex);
+    });
+  }
+  
+  // Auto-advance testimonials
+  setInterval(() => {
+    if (testimonialSlides.length > 0) {
+      const newIndex = currentTestimonial < testimonialSlides.length - 1 ? currentTestimonial + 1 : 0;
+      showTestimonialSlide(newIndex);
+    }
+  }, 6000);
+  
+  // Portfolio Modal
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  const portfolioModal = document.getElementById('portfolioModal');
+  const portfolioModalClose = document.querySelector('.portfolio-modal-close');
+  
+  // Portfolio project data
+  const portfolioData = {
+    'realtech': {
+      title: 'RealTech IT Academy',
+      type: 'Web Development - WordPress',
+      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80',
+      description: 'Modern WordPress website for IT training institute designed to improve online presence, showcase courses, and increase student inquiries.',
+      features: ['Responsive WordPress Design', 'Course Showcase System', 'Inquiry Form Integration', 'SEO Optimized', 'Fast Loading Speed', 'Mobile-Friendly'],
+      link: 'https://realtechitacademy.com'
+    },
+    'vetriarasi': {
+      title: 'Vetriarasi E-commerce',
+      type: 'E-commerce - Full Stack',
+      image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80',
+      description: 'Full-stack e-commerce with PHP & MySQL for water supply business with user authentication and real-time delivery tracking.',
+      features: ['User Authentication', 'Product Management', 'Shopping Cart', 'Order Tracking', 'Admin Dashboard', 'Payment Gateway'],
+      link: 'https://vetriarasi.com'
+    },
+    'saidah': {
+      title: 'Saidah Collections',
+      type: 'E-commerce - WordPress',
+      image: 'https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&w=800&q=80',
+      description: 'Jewelry e-commerce website for US-based brand with elegant design and seamless checkout experience.',
+      features: ['Product Listings', 'Category Navigation', 'Secure Checkout', 'Payment Integration', 'Responsive Design', 'SSL Security'],
+      link: 'https://saidahcollections.com'
+    }
+  };
+  
+  // Create modal HTML
+  const modalHTML = `
+    <div class="portfolio-modal" id="portfolioModal">
+      <div class="portfolio-modal-content">
+        <button class="portfolio-modal-close" aria-label="Close modal">×</button>
+        <img class="portfolio-modal-image" src="" alt="Project Image">
+        <div class="portfolio-modal-body">
+          <h2></h2>
+          <span class="project-type"></span>
+          <p class="project-description"></p>
+          <div class="project-features">
+            <h4>Key Features</h4>
+            <ul></ul>
+          </div>
+          <a href="#" class="project-link" target="_blank">View Live Project →</a>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Add modal to body if not exists
+  if (!document.getElementById('portfolioModal')) {
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
+  
+  const modal = document.getElementById('portfolioModal');
+  const modalClose = document.querySelector('.portfolio-modal-close');
+  
+  // Add click handlers to portfolio items
+  portfolioItems.forEach(item => {
+    const viewDetailsBtn = item.querySelector('a[href="#Portfolio"]');
+    if (viewDetailsBtn) {
+      viewDetailsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const projectTitle = item.querySelector('h3').textContent;
+        showPortfolioModal(projectTitle);
+      });
+    }
+  });
+  
+  function showPortfolioModal(projectTitle) {
+    const data = portfolioData[Object.keys(portfolioData).find(key => 
+      portfolioData[key].title.toLowerCase().includes(projectTitle.toLowerCase())
+    )];
+    
+    if (data && modal) {
+      modal.querySelector('.portfolio-modal-image').src = data.image;
+      modal.querySelector('.portfolio-modal-body h2').textContent = data.title;
+      modal.querySelector('.project-type').textContent = data.type;
+      modal.querySelector('.project-description').textContent = data.description;
+      modal.querySelector('.project-features ul').innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+      modal.querySelector('.project-link').href = data.link;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  
+  if (modalClose) {
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+  
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  
+  // Close modal on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
