@@ -735,6 +735,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .invoice-header { background: linear-gradient(135deg, #7c3aed, #2dd4bf); color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
     .invoice-header h1 { font-size: 2rem; margin-bottom: 5px; }
     .invoice-header .invoice-number { font-size: 1.1rem; opacity: 0.9; }
+    .invoice-header .logo-img { height: 60px; margin-bottom: 8px; display: block; }
     .invoice-body { padding: 30px; }
     .company-info, .client-info { margin-bottom: 30px; }
     .company-info h3, .client-info h3 { color: #7c3aed; margin-bottom: 10px; font-size: 1.1rem; }
@@ -757,9 +758,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>
   <div class="invoice-container">
     <div class="invoice-header">
-      <div>
-        <h1>zyDual</h1>
-        <p>IT & Digital Service Company</p>
+      <div style="display: flex; align-items: center; gap: 18px;">
+        <img src="https://raw.githubusercontent.com/zydual/branding/main/zydual-logo.png" alt="zyDual Logo" class="logo-img" onerror="this.style.display='none'" />
+        <div>
+          <h1>zyDual</h1>
+          <p>IT & Digital Service Company</p>
+        </div>
       </div>
       <div style="text-align: right;">
         <div class="invoice-number">Invoice #${invoiceNumber}</div>
