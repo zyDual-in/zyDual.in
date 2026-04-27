@@ -766,11 +766,31 @@ body::before {
   gap: 1.2rem;
 }
 
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 1.2rem;
+
+/* Marquee animation for technologies */
+.tech-marquee-wrap {
+  overflow: hidden;
+  width: 100%;
   margin-top: 2rem;
+  position: relative;
+}
+.tech-marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.tech-marquee-inner {
+  display: flex;
+  gap: 1.2rem;
+  animation: tech-marquee-scroll 10s linear infinite;
+}
+@keyframes tech-marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.tech-card {
+  min-width: 180px;
+  max-width: 220px;
 }
 
 .tech-card {

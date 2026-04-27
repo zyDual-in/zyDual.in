@@ -564,9 +564,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Plan/Add-on selection
+  // Plan/Add-on selection - use change event for proper radio/checkbox handling
   planInputs.forEach(input => {
     input.addEventListener('change', updateCalculation);
+  });
+
+  // Also handle click on plan-option labels for better UX
+  document.querySelectorAll('.plan-option').forEach(label => {
+    label.addEventListener('click', function() {
+      // Small delay to let the radio/checkbox state update first
+      setTimeout(updateCalculation, 50);
+    });
   });
 
   // Main calculation function
@@ -576,7 +584,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let monthlyTotal = 0;
     let yearlyTotal = 0;
 
-    // Get all selected radio groups (plans)
+
+    // Get all selected radio groups (plans) and allow deselection
     const planGroups = document.querySelectorAll('.radio-group');
     planGroups.forEach(group => {
       const checked = group.querySelector('input:checked');
@@ -759,7 +768,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="invoice-container">
     <div class="invoice-header">
       <div style="display: flex; align-items: center; gap: 18px;">
-        <img src="https://raw.githubusercontent.com/zydual/branding/main/zydual-logo.png" alt="zyDual Logo" class="logo-img" onerror="this.style.display='none'" />
+        <img src="zyDual-logo.jpeg" alt="zyDual Logo" class="logo-img" onerror="this.style.display='none'" />
         <div>
           <h1>zyDual</h1>
           <p>IT & Digital Service Company</p>
