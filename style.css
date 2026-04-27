@@ -781,11 +781,11 @@ body::before {
 }
 .tech-marquee-inner {
   display: flex;
-  gap: 0.2rem;
+  gap: 1.2rem;
   animation: tech-marquee-scroll 15s linear infinite;
 }
 @keyframes tech-marquee-scroll {
-  0% { transform: translateX(50); }
+  0% { transform: translateX(0); }
   100% { transform: translateX(-450%); }
 }
 .tech-card {
