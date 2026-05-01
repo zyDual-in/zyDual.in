@@ -264,6 +264,33 @@ window.addEventListener('DOMContentLoaded', () => {
 
   updatePricingMode('one-time');
 
+  // Pricing category show/hide toggles
+  const pricingCategories = document.querySelectorAll('.pricing-category');
+  pricingCategories.forEach((category) => {
+    const heading = category.querySelector('.section-subtitle');
+    if (!heading) return;
+
+    category.classList.add('open');
+    heading.setAttribute('role', 'button');
+    heading.setAttribute('tabindex', '0');
+    heading.classList.add('pricing-category-toggle');
+    heading.setAttribute('aria-expanded', 'true');
+
+    const toggleCategory = () => {
+      const isOpen = category.classList.toggle('collapsed');
+      heading.setAttribute('aria-expanded', String(!isOpen));
+      category.classList.toggle('open', !isOpen);
+    };
+
+    heading.addEventListener('click', toggleCategory);
+    heading.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleCategory();
+      }
+    });
+  });
+
   // Live chatbot DOM references are initialized after the markup loads
   let chatLauncher;
   let liveChat;
@@ -321,6 +348,10 @@ window.addEventListener('DOMContentLoaded', () => {
       answer: 'We create custom websites and web apps optimized for performance, conversions, and growth. Our work includes responsive builds, CMS sites, e-commerce and landing pages using modern technologies like HTML, CSS, JavaScript, React, PHP, Java, WordPress, and more.',
     },
     {
+      keywords: ['app development', 'mobile app', 'ios', 'android', 'mobile'],
+      answer: 'We develop native and cross-platform mobile applications for iOS and Android. Our app development includes UI/UX design, backend integration, app store deployment, and ongoing maintenance. We use modern frameworks like React Native, Flutter, and native technologies.',
+    },
+    {
       keywords: ['graphic design', 'design', 'branding'],
       answer: 'Our graphic design service includes branding, creative asset production and visual systems that elevate your identity across digital touch points. We offer design packs from ₹2,500 for basic branding to ₹35,000 for complete brand identity systems.',
     },
@@ -338,7 +369,7 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['pricing', 'cost', 'estimate', 'price', 'plans'],
-      answer: `Our pricing includes website development plans from ₹7,500/year for basic sites to ₹25,000/year for corporate solutions. We also offer add-on services like admin dashboards (₹5,000-₹12,000), payment gateways (₹4,000-₹10,000), and maintenance (₹1,500-₹5,000/month). Use our cost calculator for a personalized quote!`,
+      answer: `Our pricing includes website development plans from ₹7,500/year for basic sites to ₹25,000/year for corporate solutions, app development from ₹25,000 for basic apps to ₹3,00,000 for premium apps, and add-on services like admin dashboards (₹5,000-₹12,000), payment gateways (₹4,000-₹10,000), and maintenance (₹1,500-₹5,000/month). Use our cost calculator for a personalized quote!`,
     },
     {
       keywords: ['calculator', 'estimate', 'cost calculator', 'estimate cost'],
@@ -537,9 +568,6 @@ document.addEventListener('DOMContentLoaded', () => {
   accordions.forEach(accordion => {
     const header = accordion.querySelector('.accordion-header');
     header.addEventListener('click', () => {
-      accordions.forEach(acc => {
-        if (acc !== accordion) acc.classList.remove('open');
-      });
       accordion.classList.toggle('open');
     });
   });
@@ -551,6 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       billingMode = btn.dataset.billing;
       updateCalculation();
+      updateSummaryToggleVisibility();
     });
   });
 
@@ -563,6 +592,15 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCalculation();
     });
   });
+
+  function updateSummaryToggleVisibility() {
+    const summaryToggle = document.querySelector('.summary-toggle');
+    if (billingMode === 'one-time') {
+      summaryToggle.style.display = 'none';
+    } else {
+      summaryToggle.style.display = 'flex';
+    }
+  }
 
   // Plan/Add-on selection - use change event for proper radio/checkbox handling
   planInputs.forEach(input => {
@@ -593,14 +631,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const label = checked.dataset.label;
         const price = parseInt(checked.dataset.price) || 0;
         const isMonthly = checked.dataset.monthly === 'true';
+        const name = checked.name;
+        const value = checked.value;
 
-        selectedPlans.push({ label, price, isMonthly });
+        selectedPlans.push({ label, price, isMonthly, name, value });
 
-        if (isMonthly) {
-          monthlyTotal += price;
-          yearlyTotal += price * 12;
+        if (billingMode === 'monthly') {
+          // If monthly billing, convert everything to monthly
+          if (isMonthly) {
+            monthlyTotal += price;
+          } else {
+            monthlyTotal += Math.round(price / 12);
+          }
+          yearlyTotal += monthlyTotal * 12;
         } else {
-          yearlyTotal += price;
+          // One-time billing
+          if (isMonthly) {
+            monthlyTotal += price;
+            yearlyTotal += price * 12;
+          } else {
+            yearlyTotal += price;
+          }
         }
       }
     });
@@ -613,14 +664,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const label = checked.dataset.label;
         const price = parseInt(checked.dataset.price) || 0;
         const isMonthly = checked.dataset.monthly === 'true';
+        const name = checked.name;
+        const value = checked.value;
 
-        selectedAddons.push({ label, price, isMonthly });
+        selectedAddons.push({ label, price, isMonthly, name, value });
 
-        if (isMonthly) {
-          monthlyTotal += price;
-          yearlyTotal += price * 12;
+        if (billingMode === 'monthly') {
+          // If monthly billing, convert everything to monthly
+          if (isMonthly) {
+            monthlyTotal += price;
+          } else {
+            monthlyTotal += Math.round(price / 12);
+          }
+          yearlyTotal += monthlyTotal * 12;
         } else {
-          yearlyTotal += price;
+          // One-time billing
+          if (isMonthly) {
+            monthlyTotal += price;
+            yearlyTotal += price * 12;
+          } else {
+            yearlyTotal += price;
+          }
         }
       });
     });
@@ -640,6 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <li>
           <span>${plan.label}</span>
           <span class="item-price">₹${plan.price.toLocaleString()}</span>
+          <button class="remove-btn" data-type="plan" data-name="${plan.name}" data-value="${plan.value}" title="Remove this plan">×</button>
         </li>
       `).join('');
     }
@@ -652,9 +717,36 @@ document.addEventListener('DOMContentLoaded', () => {
         <li>
           <span>${addon.label}</span>
           <span class="item-price">₹${addon.price.toLocaleString()}</span>
+          <button class="remove-btn" data-type="addon" data-name="${addon.name}" data-value="${addon.value}" title="Remove this add-on">×</button>
         </li>
       `).join('');
     }
+
+    // Add event listeners to remove buttons
+    document.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const type = this.dataset.type;
+        const name = this.dataset.name;
+        const value = this.dataset.value;
+
+        if (type === 'plan') {
+          // For radio buttons, uncheck the specific input
+          const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
+          if (input) {
+            input.checked = false;
+          }
+        } else if (type === 'addon') {
+          // For checkboxes, uncheck the specific input
+          const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
+          if (input) {
+            input.checked = false;
+          }
+        }
+
+        // Update calculation after removal
+        updateCalculation();
+      });
+    });
   }
 
   // Render total amount
@@ -662,12 +754,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let displayAmount;
     let displayPeriod;
 
-    if (summaryView === 'monthly') {
-      displayAmount = monthly;
-      displayPeriod = 'per month';
+    if (billingMode === 'monthly') {
+      if (summaryView === 'monthly') {
+        displayAmount = monthly;
+        displayPeriod = 'per month';
+      } else {
+        displayAmount = yearly;
+        displayPeriod = 'per year';
+      }
     } else {
+      // One-time billing
       displayAmount = yearly;
-      displayPeriod = 'per year';
+      displayPeriod = 'one-time';
     }
 
     totalAmountEl.textContent = `₹${displayAmount.toLocaleString()}`;
@@ -676,6 +774,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial calculation
   updateCalculation();
+  updateSummaryToggleVisibility();
 });
 
 // Invoice Generator Functionality
