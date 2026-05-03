@@ -535,7 +535,7 @@ body::before {
   padding: 0.4rem 0.75rem;
 
   /* Use only ONE background */
-  background: linear-gradient(135deg, #2dd4bf 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #080808 0%, #0a0b0b 100%);
 
   /* High contrast text */
   color: #ffffff;
