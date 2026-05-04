@@ -270,11 +270,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const heading = category.querySelector('.section-subtitle');
     if (!heading) return;
 
-    category.classList.add('open');
+    category.classList.add('collapsed');
     heading.setAttribute('role', 'button');
     heading.setAttribute('tabindex', '0');
     heading.classList.add('pricing-category-toggle');
-    heading.setAttribute('aria-expanded', 'true');
+    heading.setAttribute('aria-expanded', 'false');
 
     const toggleCategory = () => {
       const isOpen = category.classList.toggle('collapsed');
