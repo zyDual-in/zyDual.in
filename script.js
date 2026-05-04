@@ -554,6 +554,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectedAddonsList = document.getElementById('selectedAddons');
   const totalAmountEl = document.getElementById('totalAmount');
   const totalPeriodEl = document.getElementById('totalPeriod');
+  const pricingRevealBtn = document.getElementById('pricingRevealBtn');
+  const serviceAccordions = document.querySelectorAll('.service-accordion');
 
   // State
   let billingMode = 'one-time'; // 'one-time' or 'monthly'
@@ -606,6 +608,33 @@ document.addEventListener('DOMContentLoaded', () => {
   planInputs.forEach(input => {
     input.addEventListener('change', updateCalculation);
   });
+
+  if (serviceAccordions.length > 0) {
+    serviceAccordions.forEach((item, index) => {
+      const header = item.querySelector('.service-accordion-header');
+      item.classList.toggle('active', index === 0);
+      header.setAttribute('aria-expanded', String(index === 0));
+      header.addEventListener('click', () => {
+        serviceAccordions.forEach((other) => {
+          const otherHeader = other.querySelector('.service-accordion-header');
+          other.classList.remove('active');
+          otherHeader.setAttribute('aria-expanded', 'false');
+        });
+        item.classList.add('active');
+        header.setAttribute('aria-expanded', 'true');
+      });
+    });
+  }
+
+  if (pricingRevealBtn) {
+    const pricingContent = document.querySelector('.pricing-content');
+    pricingRevealBtn.addEventListener('click', () => {
+      if (!pricingContent) return;
+      const isHidden = pricingContent.classList.toggle('pricing-hidden');
+      pricingRevealBtn.textContent = isHidden ? 'Show pricing plans' : 'Hide pricing plans';
+      pricingRevealBtn.setAttribute('aria-expanded', String(!isHidden));
+    });
+  }
 
   // Also handle click on plan-option labels for better UX
   document.querySelectorAll('.plan-option').forEach(label => {
