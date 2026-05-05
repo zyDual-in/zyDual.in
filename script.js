@@ -534,7 +534,14 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  formMessage.textContent = 'Thanks! Your message has been sent successfully.';
+  // Construct WhatsApp message
+  const whatsappMessage = `Hi zyDual, I would like to contact you.%0A%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
+  const whatsappURL = `https://wa.me/918072275209?text=${whatsappMessage}`;
+
+  // Open WhatsApp
+  window.open(whatsappURL, '_blank');
+
+  formMessage.textContent = 'Opening WhatsApp to send your message...';
   formMessage.style.color = '#22c55e';
 
   form.reset();
@@ -867,65 +874,109 @@ document.addEventListener('DOMContentLoaded', function() {
   <title>Invoice - zyDual</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; }
-    .invoice-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
-    .invoice-header { background: linear-gradient(135deg, #7c3aed, #2dd4bf); color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
-    .invoice-header h1 { font-size: 2rem; margin-bottom: 5px; }
-    .invoice-header .invoice-number { font-size: 1.1rem; opacity: 0.9; }
-    .invoice-header .logo-img { height: 60px; margin-bottom: 8px; display: block; }
-    .invoice-body { padding: 30px; }
-    .company-info, .client-info { margin-bottom: 30px; }
-    .company-info h3, .client-info h3 { color: #7c3aed; margin-bottom: 10px; font-size: 1.1rem; }
-    .company-info p, .client-info p { color: #666; line-height: 1.8; }
-    .invoice-table { width: 100%; border-collapse: collapse; margin: 30px 0; }
-    .invoice-table th { background: #f8f9fa; padding: 15px; text-align: left; font-weight: 600; color: #333; border-bottom: 2px solid #7c3aed; }
-    .invoice-table td { padding: 15px; border-bottom: 1px solid #eee; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; padding: 20px; color: #333; }
+    .invoice-container { max-width: 850px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); overflow: hidden; }
+    .invoice-header { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; padding: 40px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .invoice-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); opacity: 0.3; }
+    .invoice-header h1 { font-size: 2.5rem; margin-bottom: 8px; font-weight: 700; position: relative; z-index: 1; }
+    .invoice-header .invoice-number { font-size: 1.2rem; opacity: 0.95; position: relative; z-index: 1; }
+    .invoice-header .logo-section { display: flex; align-items: center; gap: 20px; position: relative; z-index: 1; }
+    .invoice-header .logo-img { height: 70px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .invoice-header .company-details h2 { font-size: 1.8rem; margin-bottom: 4px; }
+    .invoice-header .company-details p { opacity: 0.9; font-size: 1rem; }
+    .invoice-details { text-align: right; position: relative; z-index: 1; }
+    .invoice-details .invoice-number { font-size: 1.3rem; font-weight: 600; margin-bottom: 8px; }
+    .invoice-details p { margin-bottom: 4px; font-size: 1rem; }
+    
+    .invoice-body { padding: 40px; }
+    .billing-section { display: flex; gap: 50px; margin-bottom: 40px; }
+    .billing-info { flex: 1; }
+    .billing-info h3 { color: #6366f1; margin-bottom: 15px; font-size: 1.3rem; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+    .billing-info p { color: #666; line-height: 1.8; margin-bottom: 8px; }
+    .billing-info strong { color: #333; }
+    
+    .invoice-table { width: 100%; border-collapse: collapse; margin: 40px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .invoice-table th { background: linear-gradient(135deg, #f8fafc, #e2e8f0); padding: 20px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #d1d5db; font-size: 1rem; }
+    .invoice-table td { padding: 20px; border-bottom: 1px solid #f3f4f6; background: white; }
     .invoice-table tr:last-child td { border-bottom: none; }
-    .invoice-table .amount { text-align: right; font-weight: 600; }
-    .invoice-total { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: right; }
-    .invoice-total .total-label { font-size: 1.1rem; color: #666; }
-    .invoice-total .total-amount { font-size: 2rem; font-weight: 700; color: #7c3aed; }
-    .invoice-footer { background: #1e1e2e; color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
-    .invoice-footer p { font-size: 0.9rem; opacity: 0.8; }
-    .print-btn { background: #7c3aed; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem; }
-    .print-btn:hover { background: #6d28d9; }
-    @media print { body { padding: 0; } .invoice-container { box-shadow: none; } .print-btn { display: none; } }
+    .invoice-table .amount { text-align: right; font-weight: 600; color: #059669; font-size: 1.1rem; }
+    .invoice-table .description { font-weight: 500; color: #111827; }
+    .invoice-table .type { color: #6b7280; font-style: italic; }
+    
+    .invoice-summary { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 30px; border-radius: 16px; margin-top: 40px; border: 1px solid #bae6fd; }
+    .invoice-summary .summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .invoice-summary .summary-row:last-child { margin-bottom: 0; border-top: 2px solid #0ea5e9; padding-top: 20px; margin-top: 20px; }
+    .invoice-summary .summary-label { font-size: 1.2rem; color: #374151; font-weight: 500; }
+    .invoice-summary .summary-amount { font-size: 1.8rem; font-weight: 700; color: #0ea5e9; }
+    .invoice-summary .total-label { font-size: 1.4rem; color: #0f172a; font-weight: 600; }
+    .invoice-summary .total-amount { font-size: 2.5rem; font-weight: 800; color: #0ea5e9; background: linear-gradient(135deg, #0ea5e9, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    
+    .invoice-footer { background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 30px 40px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .invoice-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footer-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="20" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23footer-grain)"/></svg>'); }
+    .invoice-footer .footer-content { position: relative; z-index: 1; }
+    .invoice-footer .footer-content p { font-size: 1rem; opacity: 0.9; margin-bottom: 4px; }
+    .invoice-footer .footer-content .thank-you { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+    .print-btn { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; padding: 14px 28px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; position: relative; z-index: 1; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+    .print-btn:hover { background: linear-gradient(135deg, #5855eb, #7c3aed); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4); }
+    
+    .terms-section { margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #6366f1; }
+    .terms-section h4 { color: #374151; margin-bottom: 10px; font-size: 1.1rem; }
+    .terms-section p { color: #6b7280; font-size: 0.9rem; line-height: 1.6; }
+    
+    @media print { 
+      body { padding: 0; background: white; } 
+      .invoice-container { box-shadow: none; } 
+      .print-btn { display: none; }
+      .terms-section { page-break-inside: avoid; }
+    }
+    
+    @media (max-width: 768px) {
+      .invoice-header { flex-direction: column; text-align: center; gap: 20px; }
+      .billing-section { flex-direction: column; gap: 30px; }
+      .invoice-table th, .invoice-table td { padding: 12px; font-size: 0.9rem; }
+      .invoice-footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
   </style>
 </head>
 <body>
   <div class="invoice-container">
     <div class="invoice-header">
-      <div style="display: flex; align-items: center; gap: 18px;">
+      <div class="logo-section">
         <img src="zyDual-logo.jpeg" alt="zyDual Logo" class="logo-img" onerror="this.style.display='none'" />
-        <div>
-          <h1>zyDual</h1>
+        <div class="company-details">
+          <h2>zyDual</h2>
           <p>IT & Digital Service Company</p>
         </div>
       </div>
-      <div style="text-align: right;">
+      <div class="invoice-details">
         <div class="invoice-number">Invoice #${invoiceNumber}</div>
-        <p>Date: ${today.toLocaleDateString()}</p>
-        <p>Due: ${dueDate.toLocaleDateString()}</p>
+        <p><strong>Issue Date:</strong> ${today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p><strong>Due Date:</strong> ${dueDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p><strong>Status:</strong> <span style="color: #059669; font-weight: 600;">Pending Payment</span></p>
       </div>
     </div>
     
     <div class="invoice-body">
-      <div style="display: flex; gap: 40px;">
-        <div class="company-info">
-          <h3>From:</h3>
+      <div class="billing-section">
+        <div class="billing-info">
+          <h3>From</h3>
           <p><strong>zyDual</strong><br>
           Thudiyalur road near KGISL campus<br>
           saravanampatti, coimbatore<br>
-          TamilNadu, India<br>
-          Email: zydual.in@gmail.com<br>
-          Phone: +91 8072275209</p>
+          TamilNadu - 641035, India<br>
+          <strong>Email:</strong> zydual.in@gmail.com<br>
+          <strong>Phone:</strong> +91 8072275209 | +91 9087899641<br>
+          <strong>GST:</strong> [GST Number if applicable]</p>
         </div>
-        <div class="client-info">
-          <h3>Bill To:</h3>
-          <p><strong>Customer</strong><br>
-          [Customer details will be collected]<br>
-          <br>
-          Thank you for choosing zyDual!</p>
+        <div class="billing-info">
+          <h3>Bill To</h3>
+          <p><strong>[Customer Name]</strong><br>
+          [Customer Address]<br>
+          [City, State, PIN Code]<br>
+          [Country]<br>
+          <strong>Email:</strong> [customer@email.com]<br>
+          <strong>Phone:</strong> [Customer Phone]<br>
+          <strong>GST:</strong> [Customer GST if applicable]</p>
         </div>
       </div>
       
@@ -934,35 +985,82 @@ document.addEventListener('DOMContentLoaded', function() {
           <tr>
             <th>Description</th>
             <th>Type</th>
-            <th class="amount">Amount</th>
+            <th style="text-align: right;">Amount</th>
           </tr>
         </thead>
         <tbody>
-          ${plans.length > 0 ? plans.map(plan => `
+          ${plans.length > 0 ? plans.map(plan => {
+            const priceMatch = plan.match(/₹([\d,]+)/);
+            const price = priceMatch ? priceMatch[1] : '0';
+            const description = plan.replace(/\s*₹[\d,]+.*$/, '').trim();
+            return `
           <tr>
-            <td>${plan}</td>
-            <td>Plan</td>
-            <td class="amount">Included</td>
-          </tr>`).join('') : '<tr><td colspan="3">No plans selected</td></tr>'}
-          ${addons.length > 0 ? addons.map(addon => `
+            <td class="description">${description}</td>
+            <td class="type">Plan</td>
+            <td class="amount">₹${price}</td>
+          </tr>`;
+          }).join('') : '<tr><td colspan="3" style="text-align: center; color: #6b7280;">No plans selected</td></tr>'}
+          ${addons.length > 0 ? addons.map(addon => {
+            const priceMatch = addon.match(/₹([\d,]+)/);
+            const price = priceMatch ? priceMatch[1] : '0';
+            const description = addon.replace(/\s*₹[\d,]+.*$/, '').trim();
+            return `
           <tr>
-            <td>${addon}</td>
-            <td>Add-on</td>
-            <td class="amount">Included</td>
-          </tr>`).join('') : ''}
+            <td class="description">${description}</td>
+            <td class="type">Add-on</td>
+            <td class="amount">₹${price}</td>
+          </tr>`;
+          }).join('') : ''}
         </tbody>
       </table>
       
-      <div class="invoice-total">
-        <div class="total-label">Total Amount (${billingPeriod})</div>
-        <div class="total-amount">${totalAmount}</div>
+      <div class="invoice-summary">
+        ${(() => {
+          let subtotal = 0;
+          plans.forEach(plan => {
+            const priceMatch = plan.match(/₹([\d,]+)/);
+            if (priceMatch) {
+              subtotal += parseInt(priceMatch[1].replace(/,/g, ''));
+            }
+          });
+          addons.forEach(addon => {
+            const priceMatch = addon.match(/₹([\d,]+)/);
+            if (priceMatch) {
+              subtotal += parseInt(priceMatch[1].replace(/,/g, ''));
+            }
+          });
+          const tax = Math.round(subtotal * 0.18);
+          const total = subtotal + tax;
+          return `
+        <div class="summary-row">
+          <span class="summary-label">Subtotal</span>
+          <span class="summary-amount">₹${subtotal.toLocaleString()}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Tax (GST 18%)</span>
+          <span class="summary-amount">₹${tax.toLocaleString()}</span>
+        </div>
+        <div class="summary-row">
+          <span class="total-label">Total Amount (${billingPeriod})</span>
+          <span class="total-amount">₹${total.toLocaleString()}</span>
+        </div>`;
+        })()}
+      </div>
+      
+      <div class="terms-section">
+        <h4>Terms & Conditions</h4>
+        <p>• Payment is due within 7 days of invoice date.<br>
+        • Late payments may incur additional charges.<br>
+        • All services are subject to our standard terms of service.<br>
+        • For any queries, please contact us at zydual.in@gmail.com or +91 8072275209.</p>
       </div>
     </div>
     
     <div class="invoice-footer">
-      <div>
-        <p>Thank you for your business!</p>
-        <p>Payment due within 7 days</p>
+      <div class="footer-content">
+        <p class="thank-you">Thank you for choosing zyDual!</p>
+        <p>We appreciate your business and look forward to serving you.</p>
+        <p>Payment due within 7 days • Questions? Contact us anytime</p>
       </div>
       <button class="print-btn" onclick="window.print()">Print Invoice</button>
     </div>
