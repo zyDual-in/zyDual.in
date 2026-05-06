@@ -856,7 +856,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const invoiceHTML = generateInvoiceContent(plans, addons, totalAmount, billingPeriod);
     
     // Open invoice in new window
-    const invoiceWindow = window.open('', '_blank', 'width=800,height=900');
+    const invoiceWindow = window.open('', '_blank');
     invoiceWindow.document.write(invoiceHTML);
     invoiceWindow.document.close();
   }
@@ -925,16 +925,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     @media print { 
       body { padding: 0; background: white; } 
-      .invoice-container { box-shadow: none; } 
+      .invoice-container { box-shadow: none; max-width: none; } 
       .print-btn { display: none; }
       .terms-section { page-break-inside: avoid; }
     }
     
     @media (max-width: 768px) {
-      .invoice-header { flex-direction: column; text-align: center; gap: 20px; }
+      .invoice-header { flex-direction: column; text-align: center; gap: 20px; padding: 20px; }
       .billing-section { flex-direction: column; gap: 30px; }
       .invoice-table th, .invoice-table td { padding: 12px; font-size: 0.9rem; }
-      .invoice-footer { flex-direction: column; gap: 20px; text-align: center; }
+      .invoice-footer { flex-direction: column; gap: 20px; text-align: center; padding: 20px; }
+      .invoice-summary { padding: 20px; }
+      .invoice-body { padding: 20px; }
+    }
+    
+    @media (max-width: 480px) {
+      .invoice-header h1 { font-size: 2rem; }
+      .invoice-table { font-size: 0.8rem; }
+      .invoice-summary .total-amount { font-size: 2rem; }
+      .billing-info h3 { font-size: 1.1rem; }
     }
   </style>
 </head>
@@ -969,14 +978,8 @@ document.addEventListener('DOMContentLoaded', function() {
           <strong>GST:</strong> [GST Number if applicable]</p>
         </div>
         <div class="billing-info">
-          <h3>Bill To</h3>
-          <p><strong>[Customer Name]</strong><br>
-          [Customer Address]<br>
-          [City, State, PIN Code]<br>
-          [Country]<br>
-          <strong>Email:</strong> [customer@email.com]<br>
-          <strong>Phone:</strong> [Customer Phone]<br>
-          <strong>GST:</strong> [Customer GST if applicable]</p>
+          <h3>To</h3>
+          <p><strong>[Customer Name]</strong></p>
         </div>
       </div>
       
@@ -1029,20 +1032,10 @@ document.addEventListener('DOMContentLoaded', function() {
               subtotal += parseInt(priceMatch[1].replace(/,/g, ''));
             }
           });
-          const tax = Math.round(subtotal * 0.18);
-          const total = subtotal + tax;
           return `
         <div class="summary-row">
-          <span class="summary-label">Subtotal</span>
-          <span class="summary-amount">₹${subtotal.toLocaleString()}</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">Tax (GST 18%)</span>
-          <span class="summary-amount">₹${tax.toLocaleString()}</span>
-        </div>
-        <div class="summary-row">
           <span class="total-label">Total Amount (${billingPeriod})</span>
-          <span class="total-amount">₹${total.toLocaleString()}</span>
+          <span class="total-amount">₹${subtotal.toLocaleString()}</span>
         </div>`;
         })()}
       </div>
