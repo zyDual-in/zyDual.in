@@ -397,7 +397,7 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['contact', 'reach', 'email', 'phone', 'location', 'whatsapp'],
-      answer: `${contactDetails.join(' ')} You can also reach us via WhatsApp at +91 8072275209 for quick inquiries.`,
+      answer: `${contactDetails.join(' ')} You can also reach us via email at zydual.in@gmail.com or fill out our contact form to get in touch.`,
     },
     {
       keywords: ['about', 'who are you', 'who is zydual', 'company'],
@@ -534,14 +534,15 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // Construct WhatsApp message
-  const whatsappMessage = `Hi zyDual, I would like to contact you.%0A%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
-  const whatsappURL = `https://wa.me/918072275209?text=${whatsappMessage}`;
+  // Construct email message
+  const emailSubject = `New Contact Form Submission from ${name}`;
+  const emailBody = `Hi zyDual,%0A%0AI would like to contact you.%0A%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
+  const mailtoLink = `mailto:zydual.in@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${emailBody}`;
 
-  // Open WhatsApp
-  window.open(whatsappURL, '_blank');
+  // Open email client
+  window.location.href = mailtoLink;
 
-  formMessage.textContent = 'Opening WhatsApp to send your message...';
+  formMessage.textContent = 'Opening your email client to send your message...';
   formMessage.style.color = '#22c55e';
 
   form.reset();
