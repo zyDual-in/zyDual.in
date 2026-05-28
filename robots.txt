@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zydual-in.github.io/zyDual.in/sitemap.xml
