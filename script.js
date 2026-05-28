@@ -264,33 +264,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   updatePricingMode('one-time');
 
-  // Pricing category show/hide toggles
-  const pricingCategories = document.querySelectorAll('.pricing-category');
-  pricingCategories.forEach((category) => {
-    const heading = category.querySelector('.section-subtitle');
-    if (!heading) return;
-
-    category.classList.add('collapsed');
-    heading.setAttribute('role', 'button');
-    heading.setAttribute('tabindex', '0');
-    heading.classList.add('pricing-category-toggle');
-    heading.setAttribute('aria-expanded', 'false');
-
-    const toggleCategory = () => {
-      const isOpen = category.classList.toggle('collapsed');
-      heading.setAttribute('aria-expanded', String(!isOpen));
-      category.classList.toggle('open', !isOpen);
-    };
-
-    heading.addEventListener('click', toggleCategory);
-    heading.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggleCategory();
-      }
-    });
-  });
-
   // Live chatbot DOM references are initialized after the markup loads
   let chatLauncher;
   let liveChat;
@@ -348,10 +321,6 @@ window.addEventListener('DOMContentLoaded', () => {
       answer: 'We create custom websites and web apps optimized for performance, conversions, and growth. Our work includes responsive builds, CMS sites, e-commerce and landing pages using modern technologies like HTML, CSS, JavaScript, React, PHP, Java, WordPress, and more.',
     },
     {
-      keywords: ['app development', 'mobile app', 'ios', 'android', 'mobile'],
-      answer: 'We develop native and cross-platform mobile applications for iOS and Android. Our app development includes UI/UX design, backend integration, app store deployment, and ongoing maintenance. We use modern frameworks like React Native, Flutter, and native technologies.',
-    },
-    {
       keywords: ['graphic design', 'design', 'branding'],
       answer: 'Our graphic design service includes branding, creative asset production and visual systems that elevate your identity across digital touch points. We offer design packs from ₹2,500 for basic branding to ₹35,000 for complete brand identity systems.',
     },
@@ -369,7 +338,7 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['pricing', 'cost', 'estimate', 'price', 'plans'],
-      answer: `Our pricing includes website development plans from ₹7,500/year for basic sites to ₹25,000/year for corporate solutions, app development from ₹25,000 for basic apps to ₹3,00,000 for premium apps, and add-on services like admin dashboards (₹5,000-₹12,000), payment gateways (₹4,000-₹10,000), and maintenance (₹1,500-₹5,000/month). Use our cost calculator for a personalized quote!`,
+      answer: `Our pricing includes website development plans from ₹7,500/year for basic sites to ₹25,000/year for corporate solutions. We also offer add-on services like admin dashboards (₹5,000-₹12,000), payment gateways (₹4,000-₹10,000), and maintenance (₹1,500-₹5,000/month). Use our cost calculator for a personalized quote!`,
     },
     {
       keywords: ['calculator', 'estimate', 'cost calculator', 'estimate cost'],
@@ -397,7 +366,7 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['contact', 'reach', 'email', 'phone', 'location', 'whatsapp'],
-      answer: `${contactDetails.join(' ')} You can also reach us via email at zydual.in@gmail.com or fill out our contact form to get in touch.`,
+      answer: `${contactDetails.join(' ')} You can also reach us via WhatsApp at +91 8072275209 for quick inquiries.`,
     },
     {
       keywords: ['about', 'who are you', 'who is zydual', 'company'],
@@ -534,15 +503,7 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // Construct email message
-  const emailSubject = `New Contact Form Submission from ${name}`;
-  const emailBody = `Hi zyDual,%0A%0AI would like to contact you.%0A%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0AMessage:%0A${encodeURIComponent(message)}`;
-  const mailtoLink = `mailto:zydual.in@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${emailBody}`;
-
-  // Open email client
-  window.location.href = mailtoLink;
-
-  formMessage.textContent = 'Opening your email client to send your message...';
+  formMessage.textContent = 'Thanks! Your message has been sent successfully.';
   formMessage.style.color = '#22c55e';
 
   form.reset();
@@ -562,8 +523,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectedAddonsList = document.getElementById('selectedAddons');
   const totalAmountEl = document.getElementById('totalAmount');
   const totalPeriodEl = document.getElementById('totalPeriod');
-  const pricingRevealBtn = document.getElementById('pricingRevealBtn');
-  const serviceAccordions = document.querySelectorAll('.service-accordion');
 
   // State
   let billingMode = 'one-time'; // 'one-time' or 'monthly'
@@ -578,6 +537,9 @@ document.addEventListener('DOMContentLoaded', () => {
   accordions.forEach(accordion => {
     const header = accordion.querySelector('.accordion-header');
     header.addEventListener('click', () => {
+      accordions.forEach(acc => {
+        if (acc !== accordion) acc.classList.remove('open');
+      });
       accordion.classList.toggle('open');
     });
   });
@@ -589,7 +551,6 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       billingMode = btn.dataset.billing;
       updateCalculation();
-      updateSummaryToggleVisibility();
     });
   });
 
@@ -603,53 +564,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  function updateSummaryToggleVisibility() {
-    const summaryToggle = document.querySelector('.summary-toggle');
-    if (billingMode === 'one-time') {
-      summaryToggle.style.display = 'none';
-    } else {
-      summaryToggle.style.display = 'flex';
-    }
-  }
-
-  // Plan/Add-on selection - use change event for proper radio/checkbox handling
+  // Plan/Add-on selection
   planInputs.forEach(input => {
     input.addEventListener('change', updateCalculation);
-  });
-
-  if (serviceAccordions.length > 0) {
-    serviceAccordions.forEach((item, index) => {
-      const header = item.querySelector('.service-accordion-header');
-      item.classList.toggle('active', index === 0);
-      header.setAttribute('aria-expanded', String(index === 0));
-      header.addEventListener('click', () => {
-        serviceAccordions.forEach((other) => {
-          const otherHeader = other.querySelector('.service-accordion-header');
-          other.classList.remove('active');
-          otherHeader.setAttribute('aria-expanded', 'false');
-        });
-        item.classList.add('active');
-        header.setAttribute('aria-expanded', 'true');
-      });
-    });
-  }
-
-  if (pricingRevealBtn) {
-    const pricingContent = document.querySelector('.pricing-content');
-    pricingRevealBtn.addEventListener('click', () => {
-      if (!pricingContent) return;
-      const isHidden = pricingContent.classList.toggle('pricing-hidden');
-      pricingRevealBtn.textContent = isHidden ? 'Show pricing plans' : 'Hide pricing plans';
-      pricingRevealBtn.setAttribute('aria-expanded', String(!isHidden));
-    });
-  }
-
-  // Also handle click on plan-option labels for better UX
-  document.querySelectorAll('.plan-option').forEach(label => {
-    label.addEventListener('click', function() {
-      // Small delay to let the radio/checkbox state update first
-      setTimeout(updateCalculation, 50);
-    });
   });
 
   // Main calculation function
@@ -659,8 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let monthlyTotal = 0;
     let yearlyTotal = 0;
 
-
-    // Get all selected radio groups (plans) and allow deselection
+    // Get all selected radio groups (plans)
     const planGroups = document.querySelectorAll('.radio-group');
     planGroups.forEach(group => {
       const checked = group.querySelector('input:checked');
@@ -668,27 +584,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const label = checked.dataset.label;
         const price = parseInt(checked.dataset.price) || 0;
         const isMonthly = checked.dataset.monthly === 'true';
-        const name = checked.name;
-        const value = checked.value;
 
-        selectedPlans.push({ label, price, isMonthly, name, value });
+        selectedPlans.push({ label, price, isMonthly });
 
-        if (billingMode === 'monthly') {
-          // If monthly billing, convert everything to monthly
-          if (isMonthly) {
-            monthlyTotal += price;
-          } else {
-            monthlyTotal += Math.round(price / 12);
-          }
-          yearlyTotal += monthlyTotal * 12;
+        if (isMonthly) {
+          monthlyTotal += price;
+          yearlyTotal += price * 12;
         } else {
-          // One-time billing
-          if (isMonthly) {
-            monthlyTotal += price;
-            yearlyTotal += price * 12;
-          } else {
-            yearlyTotal += price;
-          }
+          yearlyTotal += price;
         }
       }
     });
@@ -701,27 +604,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const label = checked.dataset.label;
         const price = parseInt(checked.dataset.price) || 0;
         const isMonthly = checked.dataset.monthly === 'true';
-        const name = checked.name;
-        const value = checked.value;
 
-        selectedAddons.push({ label, price, isMonthly, name, value });
+        selectedAddons.push({ label, price, isMonthly });
 
-        if (billingMode === 'monthly') {
-          // If monthly billing, convert everything to monthly
-          if (isMonthly) {
-            monthlyTotal += price;
-          } else {
-            monthlyTotal += Math.round(price / 12);
-          }
-          yearlyTotal += monthlyTotal * 12;
+        if (isMonthly) {
+          monthlyTotal += price;
+          yearlyTotal += price * 12;
         } else {
-          // One-time billing
-          if (isMonthly) {
-            monthlyTotal += price;
-            yearlyTotal += price * 12;
-          } else {
-            yearlyTotal += price;
-          }
+          yearlyTotal += price;
         }
       });
     });
@@ -741,7 +631,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <li>
           <span>${plan.label}</span>
           <span class="item-price">₹${plan.price.toLocaleString()}</span>
-          <button class="remove-btn" data-type="plan" data-name="${plan.name}" data-value="${plan.value}" title="Remove this plan">×</button>
         </li>
       `).join('');
     }
@@ -754,36 +643,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <li>
           <span>${addon.label}</span>
           <span class="item-price">₹${addon.price.toLocaleString()}</span>
-          <button class="remove-btn" data-type="addon" data-name="${addon.name}" data-value="${addon.value}" title="Remove this add-on">×</button>
         </li>
       `).join('');
     }
-
-    // Add event listeners to remove buttons
-    document.querySelectorAll('.remove-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const type = this.dataset.type;
-        const name = this.dataset.name;
-        const value = this.dataset.value;
-
-        if (type === 'plan') {
-          // For radio buttons, uncheck the specific input
-          const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
-          if (input) {
-            input.checked = false;
-          }
-        } else if (type === 'addon') {
-          // For checkboxes, uncheck the specific input
-          const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
-          if (input) {
-            input.checked = false;
-          }
-        }
-
-        // Update calculation after removal
-        updateCalculation();
-      });
-    });
   }
 
   // Render total amount
@@ -791,18 +653,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let displayAmount;
     let displayPeriod;
 
-    if (billingMode === 'monthly') {
-      if (summaryView === 'monthly') {
-        displayAmount = monthly;
-        displayPeriod = 'per month';
-      } else {
-        displayAmount = yearly;
-        displayPeriod = 'per year';
-      }
+    if (summaryView === 'monthly') {
+      displayAmount = monthly;
+      displayPeriod = 'per month';
     } else {
-      // One-time billing
       displayAmount = yearly;
-      displayPeriod = 'one-time';
+      displayPeriod = 'per year';
     }
 
     totalAmountEl.textContent = `₹${displayAmount.toLocaleString()}`;
@@ -811,7 +667,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial calculation
   updateCalculation();
-  updateSummaryToggleVisibility();
 });
 
 // Invoice Generator Functionality
@@ -857,7 +712,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const invoiceHTML = generateInvoiceContent(plans, addons, totalAmount, billingPeriod);
     
     // Open invoice in new window
-    const invoiceWindow = window.open('', '_blank');
+    const invoiceWindow = window.open('', '_blank', 'width=800,height=900');
     invoiceWindow.document.write(invoiceHTML);
     invoiceWindow.document.close();
   }
@@ -875,112 +730,61 @@ document.addEventListener('DOMContentLoaded', function() {
   <title>Invoice - zyDual</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; padding: 20px; color: #333; }
-    .invoice-container { max-width: 850px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); overflow: hidden; }
-    .invoice-header { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; padding: 40px; display: flex; justify-content: space-between; align-items: center; position: relative; }
-    .invoice-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); opacity: 0.3; }
-    .invoice-header h1 { font-size: 2.5rem; margin-bottom: 8px; font-weight: 700; position: relative; z-index: 1; }
-    .invoice-header .invoice-number { font-size: 1.2rem; opacity: 0.95; position: relative; z-index: 1; }
-    .invoice-header .logo-section { display: flex; align-items: center; gap: 20px; position: relative; z-index: 1; }
-    .invoice-header .logo-img { height: 70px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .invoice-header .company-details h2 { font-size: 1.8rem; margin-bottom: 4px; }
-    .invoice-header .company-details p { opacity: 0.9; font-size: 1rem; }
-    .invoice-details { text-align: right; position: relative; z-index: 1; }
-    .invoice-details .invoice-number { font-size: 1.3rem; font-weight: 600; margin-bottom: 8px; }
-    .invoice-details p { margin-bottom: 4px; font-size: 1rem; }
-    
-    .invoice-body { padding: 40px; }
-    .billing-section { display: flex; gap: 50px; margin-bottom: 40px; }
-    .billing-info { flex: 1; }
-    .billing-info h3 { color: #6366f1; margin-bottom: 15px; font-size: 1.3rem; font-weight: 600; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
-    .billing-info p { color: #666; line-height: 1.8; margin-bottom: 8px; }
-    .billing-info strong { color: #333; }
-    
-    .invoice-table { width: 100%; border-collapse: collapse; margin: 40px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .invoice-table th { background: linear-gradient(135deg, #f8fafc, #e2e8f0); padding: 20px; text-align: left; font-weight: 700; color: #374151; border-bottom: 2px solid #d1d5db; font-size: 1rem; }
-    .invoice-table td { padding: 20px; border-bottom: 1px solid #f3f4f6; background: white; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding: 20px; }
+    .invoice-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); overflow: hidden; }
+    .invoice-header { background: linear-gradient(135deg, #7c3aed, #2dd4bf); color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center; }
+    .invoice-header h1 { font-size: 2rem; margin-bottom: 5px; }
+    .invoice-header .invoice-number { font-size: 1.1rem; opacity: 0.9; }
+    .invoice-body { padding: 30px; }
+    .company-info, .client-info { margin-bottom: 30px; }
+    .company-info h3, .client-info h3 { color: #7c3aed; margin-bottom: 10px; font-size: 1.1rem; }
+    .company-info p, .client-info p { color: #666; line-height: 1.8; }
+    .invoice-table { width: 100%; border-collapse: collapse; margin: 30px 0; }
+    .invoice-table th { background: #f8f9fa; padding: 15px; text-align: left; font-weight: 600; color: #333; border-bottom: 2px solid #7c3aed; }
+    .invoice-table td { padding: 15px; border-bottom: 1px solid #eee; }
     .invoice-table tr:last-child td { border-bottom: none; }
-    .invoice-table .amount { text-align: right; font-weight: 600; color: #059669; font-size: 1.1rem; }
-    .invoice-table .description { font-weight: 500; color: #111827; }
-    .invoice-table .type { color: #6b7280; font-style: italic; }
-    
-    .invoice-summary { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 30px; border-radius: 16px; margin-top: 40px; border: 1px solid #bae6fd; }
-    .invoice-summary .summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-    .invoice-summary .summary-row:last-child { margin-bottom: 0; border-top: 2px solid #0ea5e9; padding-top: 20px; margin-top: 20px; }
-    .invoice-summary .summary-label { font-size: 1.2rem; color: #374151; font-weight: 500; }
-    .invoice-summary .summary-amount { font-size: 1.8rem; font-weight: 700; color: #0ea5e9; }
-    .invoice-summary .total-label { font-size: 1.4rem; color: #0f172a; font-weight: 600; }
-    .invoice-summary .total-amount { font-size: 2.5rem; font-weight: 800; color: #0ea5e9; background: linear-gradient(135deg, #0ea5e9, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    
-    .invoice-footer { background: linear-gradient(135deg, #1e293b, #334155); color: white; padding: 30px 40px; display: flex; justify-content: space-between; align-items: center; position: relative; }
-    .invoice-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footer-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="20" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23footer-grain)"/></svg>'); }
-    .invoice-footer .footer-content { position: relative; z-index: 1; }
-    .invoice-footer .footer-content p { font-size: 1rem; opacity: 0.9; margin-bottom: 4px; }
-    .invoice-footer .footer-content .thank-you { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
-    .print-btn { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; padding: 14px 28px; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; position: relative; z-index: 1; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
-    .print-btn:hover { background: linear-gradient(135deg, #5855eb, #7c3aed); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4); }
-    
-    .terms-section { margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 8px; border-left: 4px solid #6366f1; }
-    .terms-section h4 { color: #374151; margin-bottom: 10px; font-size: 1.1rem; }
-    .terms-section p { color: #6b7280; font-size: 0.9rem; line-height: 1.6; }
-    
-    @media print { 
-      body { padding: 0; background: white; } 
-      .invoice-container { box-shadow: none; max-width: none; } 
-      .print-btn { display: none; }
-      .terms-section { page-break-inside: avoid; }
-    }
-    
-    @media (max-width: 768px) {
-      .invoice-header { flex-direction: column; text-align: center; gap: 20px; padding: 20px; }
-      .billing-section { flex-direction: column; gap: 30px; }
-      .invoice-table th, .invoice-table td { padding: 12px; font-size: 0.9rem; }
-      .invoice-footer { flex-direction: column; gap: 20px; text-align: center; padding: 20px; }
-      .invoice-summary { padding: 20px; }
-      .invoice-body { padding: 20px; }
-    }
-    
-    @media (max-width: 480px) {
-      .invoice-header h1 { font-size: 2rem; }
-      .invoice-table { font-size: 0.8rem; }
-      .invoice-summary .total-amount { font-size: 2rem; }
-      .billing-info h3 { font-size: 1.1rem; }
-    }
+    .invoice-table .amount { text-align: right; font-weight: 600; }
+    .invoice-total { background: #f8f9fa; padding: 20px; border-radius: 8px; text-align: right; }
+    .invoice-total .total-label { font-size: 1.1rem; color: #666; }
+    .invoice-total .total-amount { font-size: 2rem; font-weight: 700; color: #7c3aed; }
+    .invoice-footer { background: #1e1e2e; color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
+    .invoice-footer p { font-size: 0.9rem; opacity: 0.8; }
+    .print-btn { background: #7c3aed; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+    .print-btn:hover { background: #6d28d9; }
+    @media print { body { padding: 0; } .invoice-container { box-shadow: none; } .print-btn { display: none; } }
   </style>
 </head>
 <body>
   <div class="invoice-container">
     <div class="invoice-header">
-      <div class="logo-section">
-        <img src="zyDual-logo.jpeg" alt="zyDual Logo" class="logo-img" onerror="this.style.display='none'" />
-        <div class="company-details">
-          <h2>zyDual</h2>
-          <p>IT & Digital Service Company</p>
-        </div>
+      <div>
+        <h1>zyDual</h1>
+        <p>IT & Digital Service Company</p>
       </div>
-      <div class="invoice-details">
+      <div style="text-align: right;">
         <div class="invoice-number">Invoice #${invoiceNumber}</div>
-        <p><strong>Issue Date:</strong> ${today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-        <p><strong>Due Date:</strong> ${dueDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-        <p><strong>Status:</strong> <span style="color: #059669; font-weight: 600;">Pending Payment</span></p>
+        <p>Date: ${today.toLocaleDateString()}</p>
+        <p>Due: ${dueDate.toLocaleDateString()}</p>
       </div>
     </div>
     
     <div class="invoice-body">
-      <div class="billing-section">
-        <div class="billing-info">
-          <h3>From</h3>
+      <div style="display: flex; gap: 40px;">
+        <div class="company-info">
+          <h3>From:</h3>
           <p><strong>zyDual</strong><br>
           Thudiyalur road near KGISL campus<br>
           saravanampatti, coimbatore<br>
-          TamilNadu - 641035, India<br>
-          <strong>Email:</strong> zydual.in@gmail.com<br>
-          <strong>Phone:</strong> +91 8072275209 | +91 9087899641<br>
-          <strong>GST:</strong> [GST Number if applicable]</p>
+          TamilNadu, India<br>
+          Email: zydual.in@gmail.com<br>
+          Phone: +91 8072275209</p>
         </div>
-        <div class="billing-info">
-          <h3>To</h3>
-          <p><strong>[Customer Name]</strong></p>
+        <div class="client-info">
+          <h3>Bill To:</h3>
+          <p><strong>Customer</strong><br>
+          [Customer details will be collected]<br>
+          <br>
+          Thank you for choosing zyDual!</p>
         </div>
       </div>
       
@@ -989,72 +793,35 @@ document.addEventListener('DOMContentLoaded', function() {
           <tr>
             <th>Description</th>
             <th>Type</th>
-            <th style="text-align: right;">Amount</th>
+            <th class="amount">Amount</th>
           </tr>
         </thead>
         <tbody>
-          ${plans.length > 0 ? plans.map(plan => {
-            const priceMatch = plan.match(/₹([\d,]+)/);
-            const price = priceMatch ? priceMatch[1] : '0';
-            const description = plan.replace(/\s*₹[\d,]+.*$/, '').trim();
-            return `
+          ${plans.length > 0 ? plans.map(plan => `
           <tr>
-            <td class="description">${description}</td>
-            <td class="type">Plan</td>
-            <td class="amount">₹${price}</td>
-          </tr>`;
-          }).join('') : '<tr><td colspan="3" style="text-align: center; color: #6b7280;">No plans selected</td></tr>'}
-          ${addons.length > 0 ? addons.map(addon => {
-            const priceMatch = addon.match(/₹([\d,]+)/);
-            const price = priceMatch ? priceMatch[1] : '0';
-            const description = addon.replace(/\s*₹[\d,]+.*$/, '').trim();
-            return `
+            <td>${plan}</td>
+            <td>Plan</td>
+            <td class="amount">Included</td>
+          </tr>`).join('') : '<tr><td colspan="3">No plans selected</td></tr>'}
+          ${addons.length > 0 ? addons.map(addon => `
           <tr>
-            <td class="description">${description}</td>
-            <td class="type">Add-on</td>
-            <td class="amount">₹${price}</td>
-          </tr>`;
-          }).join('') : ''}
+            <td>${addon}</td>
+            <td>Add-on</td>
+            <td class="amount">Included</td>
+          </tr>`).join('') : ''}
         </tbody>
       </table>
       
-      <div class="invoice-summary">
-        ${(() => {
-          let subtotal = 0;
-          plans.forEach(plan => {
-            const priceMatch = plan.match(/₹([\d,]+)/);
-            if (priceMatch) {
-              subtotal += parseInt(priceMatch[1].replace(/,/g, ''));
-            }
-          });
-          addons.forEach(addon => {
-            const priceMatch = addon.match(/₹([\d,]+)/);
-            if (priceMatch) {
-              subtotal += parseInt(priceMatch[1].replace(/,/g, ''));
-            }
-          });
-          return `
-        <div class="summary-row">
-          <span class="total-label">Total Amount (${billingPeriod})</span>
-          <span class="total-amount">₹${subtotal.toLocaleString()}</span>
-        </div>`;
-        })()}
-      </div>
-      
-      <div class="terms-section">
-        <h4>Terms & Conditions</h4>
-        <p>• Payment is due within 7 days of invoice date.<br>
-        • Late payments may incur additional charges.<br>
-        • All services are subject to our standard terms of service.<br>
-        • For any queries, please contact us at zydual.in@gmail.com or +91 8072275209.</p>
+      <div class="invoice-total">
+        <div class="total-label">Total Amount (${billingPeriod})</div>
+        <div class="total-amount">${totalAmount}</div>
       </div>
     </div>
     
     <div class="invoice-footer">
-      <div class="footer-content">
-        <p class="thank-you">Thank you for choosing zyDual!</p>
-        <p>We appreciate your business and look forward to serving you.</p>
-        <p>Payment due within 7 days • Questions? Contact us anytime</p>
+      <div>
+        <p>Thank you for your business!</p>
+        <p>Payment due within 7 days</p>
       </div>
       <button class="print-btn" onclick="window.print()">Print Invoice</button>
     </div>
