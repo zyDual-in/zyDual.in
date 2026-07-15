@@ -4,8 +4,7 @@ const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
 const navItems = Array.from(document.querySelectorAll('.nav-item'));
 const sections = Array.from(document.querySelectorAll('main section'));
-const form = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
+const contactForms = Array.from(document.querySelectorAll('.contact-form'));
 const counters = document.querySelectorAll('.stat-number');
 const testimonialCards = document.querySelectorAll('.testimonial-card');
 const testimonialButtons = document.querySelectorAll('.testimonial-btn');
@@ -492,32 +491,46 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
+function setupContactForm(form) {
+  const formMessage = form.querySelector('.form-message');
+  const nameField = form.querySelector('input[name="name"]');
+  const emailField = form.querySelector('input[name="email"]');
+  const messageField = form.querySelector('textarea[name="message"]');
 
-  if (!name || !email || !message) {
-    formMessage.textContent = 'Please fill in all fields before submitting.';
-    formMessage.style.color = '#f97316';
-    return;
-  }
+  if (!formMessage || !nameField || !emailField || !messageField) return;
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    formMessage.textContent = 'Please provide a valid email address.';
-    formMessage.style.color = '#f97316';
-    return;
-  }
+  form.addEventListener('submit', (e) => {
+    const name = nameField.value.trim();
+    const email = emailField.value.trim();
+    const message = messageField.value.trim();
 
-  formMessage.textContent = 'Thanks! Your message has been sent successfully.';
-  formMessage.style.color = '#22c55e';
+    if (!name || !email || !message) {
+      e.preventDefault();
+      formMessage.textContent = 'Please fill in all fields before submitting.';
+      formMessage.style.color = '#f97316';
+      return;
+    }
 
-  form.reset();
-});
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      e.preventDefault();
+      formMessage.textContent = 'Please provide a valid email address.';
+      formMessage.style.color = '#f97316';
+      return;
+    }
 
-/* ========================================
+    if (!form.action) {
+      e.preventDefault();
+      formMessage.textContent = 'Thanks! Your message has been sent successfully.';
+      formMessage.style.color = '#22c55e';
+      form.reset();
+    }
+  });
+}
+
+contactForms.forEach(setupContactForm);
+
+/* ========================================"}]}
    COST ESTIMATOR FUNCTIONALITY
    ======================================== */
 
