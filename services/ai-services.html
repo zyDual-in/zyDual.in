@@ -75,6 +75,576 @@
   }
   </script>
   <title>Zydual AI Services | Chatbots, Automation & Generative AI</title>
+  <style>
+    .ai-page-hero {
+      margin: 24px auto 30px;
+      padding: 42px 24px;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, rgba(6, 14, 30, 0.98), rgba(27, 46, 93, 0.95));
+      border: 1px solid rgba(116, 224, 255, 0.24);
+      box-shadow: 0 24px 80px rgba(13, 23, 51, 0.45);
+    }
+
+    .ai-page-hero::before {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -15%;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(62, 229, 255, 0.28), transparent 70%);
+      filter: blur(8px);
+      animation: floatGlow 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .ai-page-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -20% -20% auto;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.2), transparent 70%);
+      filter: blur(8px);
+      animation: floatGlow 8s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+
+    .ai-page-hero-content {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 34px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ai-page-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(125, 232, 255, 0.25);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8cecff;
+      margin-bottom: 16px;
+    }
+
+    .ai-page-hero-copy h1 {
+      font-size: clamp(2.3rem, 4vw, 3.6rem);
+      line-height: 1.05;
+      margin-bottom: 16px;
+      color: #f8fbff;
+    }
+
+    .ai-page-hero-copy p {
+      color: rgba(232, 242, 255, 0.86);
+      max-width: 660px;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .ai-page-hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .ai-page-hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .ai-page-hero-stats > div {
+      min-width: 110px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+    }
+
+    .ai-page-hero-stats strong {
+      display: block;
+      color: #7fe8ff;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .ai-page-hero-stats span {
+      color: rgba(232, 242, 255, 0.72);
+      font-size: 0.85rem;
+    }
+
+    .ai-page-dashboard {
+      position: relative;
+      min-height: 360px;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(9, 18, 37, 0.65);
+      border: 1px solid rgba(120, 224, 255, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 20px 60px rgba(7, 16, 38, 0.35);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .ai-page-dashboard-glow {
+      position: absolute;
+      inset: 20px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, rgba(62, 229, 255, 0.12), transparent 60%);
+      pointer-events: none;
+    }
+
+    .ai-page-node {
+      position: absolute;
+      min-width: 138px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 10px 30px rgba(7, 16, 38, 0.25);
+      backdrop-filter: blur(16px);
+      animation: pulseNode 3s ease-in-out infinite;
+    }
+
+    .ai-page-node-input {
+      top: 26px;
+      left: 24px;
+      background: linear-gradient(135deg, rgba(0, 106, 255, 0.45), rgba(12, 45, 94, 0.82));
+    }
+
+    .ai-page-node-brain {
+      top: 26px;
+      right: 24px;
+      background: linear-gradient(135deg, rgba(110, 72, 255, 0.45), rgba(30, 16, 82, 0.9));
+      animation-delay: 0.4s;
+    }
+
+    .ai-page-node-engine {
+      bottom: 30px;
+      left: 28%;
+      background: linear-gradient(135deg, rgba(37, 198, 255, 0.38), rgba(10, 62, 92, 0.88));
+      animation-delay: 0.8s;
+    }
+
+    .ai-page-node-result {
+      bottom: 30px;
+      right: 24px;
+      background: linear-gradient(135deg, rgba(89, 191, 255, 0.42), rgba(13, 77, 133, 0.9));
+      animation-delay: 1.2s;
+    }
+
+    .ai-page-connection {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #53e8ff 40%, #9368ff 100%);
+      box-shadow: 0 0 18px rgba(83, 232, 255, 0.5);
+      animation: flowLine 2.4s linear infinite;
+    }
+
+    .ai-page-connection--1 {
+      top: 92px;
+      left: 174px;
+      width: 130px;
+      transform: rotate(0deg);
+    }
+
+    .ai-page-connection--2 {
+      top: 92px;
+      right: 176px;
+      width: 120px;
+      transform: rotate(0deg);
+    }
+
+    .ai-page-connection--3 {
+      bottom: 116px;
+      left: 50%;
+      width: 138px;
+      transform: translateX(-50%) rotate(-90deg);
+      animation-duration: 3s;
+    }
+
+    .ai-page-section {
+      margin-top: 30px;
+    }
+
+    .ai-page-section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .ai-page-section-head span {
+      color: #72e3ff;
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .ai-page-section-head h2 {
+      color: #f8fbff;
+      margin: 0;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    }
+
+    .ai-page-section-head p {
+      color: rgba(232, 242, 255, 0.75);
+      margin: 0;
+      max-width: 680px;
+    }
+
+    .ai-page-workflow {
+      display: grid;
+      gap: 14px;
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .ai-page-workflow-card {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+      border: 1px solid rgba(125, 232, 255, 0.18);
+      color: #f8fbff;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(8, 17, 37, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-page-workflow-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(125, 232, 255, 0.16), transparent);
+      transform: translateX(-100%);
+      animation: shimmer 4s linear infinite;
+    }
+
+    .ai-page-arrow {
+      text-align: center;
+      color: #72e3ff;
+      font-size: 1.25rem;
+      animation: bounceArrow 1.6s ease-in-out infinite;
+    }
+
+    .ai-page-agent-grid,
+    .ai-page-tech-grid,
+    .ai-page-usecase-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .ai-page-agent-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ai-page-agent-card,
+    .ai-page-tech-badge,
+    .ai-page-usecase-card,
+    .ai-page-faq-item {
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 16px 40px rgba(5, 10, 25, 0.18);
+      backdrop-filter: blur(16px);
+    }
+
+    .ai-page-agent-card {
+      padding: 20px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ai-page-agent-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(114, 227, 255, 0.38);
+      box-shadow: 0 18px 42px rgba(11, 29, 63, 0.26);
+    }
+
+    .ai-page-agent-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, rgba(114,227,255,0.25), rgba(139,92,246,0.24));
+      font-size: 1.2rem;
+    }
+
+    .ai-page-agent-card h3 {
+      color: #f8fbff;
+      margin-bottom: 10px;
+      font-size: 1.06rem;
+    }
+
+    .ai-page-agent-card p {
+      color: rgba(232,242,255,0.75);
+      margin-bottom: 12px;
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+
+    .ai-page-agent-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .ai-page-agent-features span {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      color: #8cecff;
+      background: rgba(114,227,255,0.12);
+      border: 1px solid rgba(114,227,255,0.16);
+    }
+
+    .ai-page-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.84rem;
+      color: #8cffb7;
+      font-weight: 700;
+    }
+
+    .ai-page-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 4px rgba(140,255,183,0.16);
+    }
+
+    .ai-page-tech-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .ai-page-tech-badge {
+      padding: 16px 18px;
+      text-align: center;
+      color: #f8fbff;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+    }
+
+    .ai-page-usecase-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .ai-page-usecase-card {
+      padding: 20px;
+    }
+
+    .ai-page-usecase-card h3 {
+      color: #f8fbff;
+      margin-bottom: 8px;
+    }
+
+    .ai-page-usecase-card p {
+      color: rgba(232,242,255,0.75);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .ai-page-faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .ai-page-faq-item {
+      overflow: hidden;
+    }
+
+    .ai-page-faq-question {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 0;
+      color: #f8fbff;
+      padding: 18px 20px;
+      font: inherit;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .ai-page-faq-question span {
+      color: #72e3ff;
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .ai-page-faq-item.active .ai-page-faq-question span {
+      transform: rotate(45deg);
+    }
+
+    .ai-page-faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 20px;
+      color: rgba(232,242,255,0.76);
+      line-height: 1.7;
+    }
+
+    .ai-page-faq-item.active .ai-page-faq-answer {
+      max-height: 160px;
+      padding: 0 20px 18px;
+    }
+
+    .ai-page-reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .ai-page-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(12px, -12px, 0); }
+    }
+
+    @keyframes pulseNode {
+      0%, 100% { transform: translateY(0); box-shadow: 0 10px 30px rgba(7, 16, 38, 0.25); }
+      50% { transform: translateY(-4px); box-shadow: 0 16px 38px rgba(7, 16, 38, 0.32); }
+    }
+
+    @keyframes flowLine {
+      0% { background-position: 0% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    @media (max-width: 1100px) {
+      .ai-page-hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-page-agent-grid,
+      .ai-page-tech-grid,
+      .ai-page-usecase-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ai-page-hero {
+        padding: 24px 14px;
+      }
+
+      .ai-page-dashboard {
+        min-height: 300px;
+        padding: 16px;
+      }
+
+      .ai-page-node {
+        min-width: 116px;
+        font-size: 0.9rem;
+        padding: 12px 12px;
+      }
+
+      .ai-page-node-input {
+        top: 24px;
+        left: 12px;
+      }
+
+      .ai-page-node-brain {
+        top: 24px;
+        right: 12px;
+      }
+
+      .ai-page-node-engine {
+        left: 24%;
+        bottom: 24px;
+      }
+
+      .ai-page-node-result {
+        right: 12px;
+        bottom: 24px;
+      }
+
+      .ai-page-connection--1 {
+        left: 124px;
+        width: 90px;
+      }
+
+      .ai-page-connection--2 {
+        right: 124px;
+        width: 80px;
+      }
+
+      .ai-page-connection--3 {
+        width: 114px;
+      }
+
+      .ai-page-agent-grid,
+      .ai-page-tech-grid,
+      .ai-page-usecase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .ai-page-hero-copy h1 {
+        font-size: 2.1rem;
+      }
+
+      .ai-page-hero-stats {
+        flex-direction: column;
+      }
+
+      .ai-page-dashboard {
+        min-height: 320px;
+      }
+
+      .ai-page-node {
+        position: static;
+        display: block;
+        margin: 8px 0;
+      }
+
+      .ai-page-connection {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
   <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
@@ -97,23 +667,37 @@
     </div>
   </header>
   <main>
-    <section class="hero">
+    <section class="hero ai-page-hero ai-page-reveal">
       <div class="hero-bg"></div>
       <div class="hero-slideshow" aria-hidden="true">
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1500&q=80');"></div>
-
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1500&q=80');"></div>
-
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1500&q=80');"></div>
-</div>
-      <div class="container hero-content">
-        <div class="hero-copy">
-          <h1>AI Services That Automate Workflows and Scale Smarter Experiences</h1>
-          <p>Zydual helps businesses implement AI solutions, chatbots, content automation, and machine learning strategies that improve productivity and customer outcomes.</p>
-          <div class="hero-cta">
-            <a href="#pricing" class="btn btn-primary">Explore AI Packages</a>
-            <a href="#contact" class="btn btn-secondary">Book a Demo</a>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1500&q=80');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1500&q=80');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=1500&q=80');"></div>
+      </div>
+      <div class="container hero-content ai-page-hero-content">
+        <div class="hero-copy ai-page-hero-copy">
+          <span class="ai-page-eyebrow">AI Automation • 24/7 Growth Engine</span>
+          <h1>Build Your AI Workforce That Works 24/7</h1>
+          <p>Deploy intelligent agents, automation workflows, and smart decision engines that accelerate support, sales, operations, and growth without adding headcount.</p>
+          <div class="hero-cta ai-page-hero-cta">
+            <a href="#contact" class="btn btn-primary">Get Live Demo</a>
+            <a href="#contact" class="btn btn-secondary">Book AI Consultation</a>
           </div>
+          <div class="ai-page-hero-stats">
+            <div><strong>24/7</strong><span>Agent uptime</span></div>
+            <div><strong>3x</strong><span>Faster response</span></div>
+            <div><strong>Auto</strong><span>Workflow orchestration</span></div>
+          </div>
+        </div>
+        <div class="ai-page-dashboard" aria-label="Animated AI automation flow">
+          <div class="ai-page-dashboard-glow"></div>
+          <div class="ai-page-node ai-page-node-input">Customer Request</div>
+          <div class="ai-page-connection ai-page-connection--1"></div>
+          <div class="ai-page-node ai-page-node-brain">AI Brain</div>
+          <div class="ai-page-connection ai-page-connection--2"></div>
+          <div class="ai-page-node ai-page-node-engine">Automation Engine</div>
+          <div class="ai-page-connection ai-page-connection--3"></div>
+          <div class="ai-page-node ai-page-node-result">Business Result</div>
         </div>
       </div>
     </section>
@@ -164,6 +748,141 @@
         </div>
       </div>
     </section>
+    <section class="section ai-page-section ai-page-reveal">
+      <div class="container">
+        <div class="ai-page-section-head">
+          <span>02</span>
+          <h2>AI Workflow Automation</h2>
+          <p>Turn every customer touchpoint into a measurable growth event with connected AI agents and smart workflows.</p>
+        </div>
+        <div class="ai-page-workflow">
+          <div class="ai-page-workflow-card">Customer Request</div>
+          <div class="ai-page-arrow">↓</div>
+          <div class="ai-page-workflow-card">AI Agent</div>
+          <div class="ai-page-arrow">↓</div>
+          <div class="ai-page-workflow-card">Decision Engine</div>
+          <div class="ai-page-arrow">↓</div>
+          <div class="ai-page-workflow-card">Automation Workflow</div>
+          <div class="ai-page-arrow">↓</div>
+          <div class="ai-page-workflow-card">Business Result</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ai-page-section ai-page-reveal">
+      <div class="container">
+        <div class="ai-page-section-head">
+          <span>03</span>
+          <h2>AI Agent Workforce</h2>
+          <p>Deploy a dedicated digital team that supports customers, staff, and growth initiatives in real time.</p>
+        </div>
+        <div class="ai-page-agent-grid">
+          <article class="ai-page-agent-card">
+            <div class="ai-page-agent-icon">💬</div>
+            <h3>Customer Support AI Agent</h3>
+            <p>Handles enquiries, ticket triage, and follow-up automatically with a warm conversational experience.</p>
+            <div class="ai-page-agent-features"><span>24/7</span><span>Multichannel</span></div>
+            <div class="ai-page-status">Active</div>
+          </article>
+          <article class="ai-page-agent-card">
+            <div class="ai-page-agent-icon">💼</div>
+            <h3>Sales AI Agent</h3>
+            <p>Qualifies leads, responds instantly, and routes premium enquiries to your team without delay.</p>
+            <div class="ai-page-agent-features"><span>Lead Scoring</span><span>CRM Ready</span></div>
+            <div class="ai-page-status">Running</div>
+          </article>
+          <article class="ai-page-agent-card">
+            <div class="ai-page-agent-icon">✉️</div>
+            <h3>Email Automation Agent</h3>
+            <p>Automates follow-ups, nurturing, reminders, and personalized outreach across campaigns.</p>
+            <div class="ai-page-agent-features"><span>Sequence</span><span>Personalized</span></div>
+            <div class="ai-page-status">Online</div>
+          </article>
+          <article class="ai-page-agent-card">
+            <div class="ai-page-agent-icon">🎙️</div>
+            <h3>Voice AI Agent</h3>
+            <p>Delivers voice-first support and call handling that feels human, fast, and scalable.</p>
+            <div class="ai-page-agent-features"><span>Voice</span><span>Call Routing</span></div>
+            <div class="ai-page-status">Active</div>
+          </article>
+          <article class="ai-page-agent-card">
+            <div class="ai-page-agent-icon">📈</div>
+            <h3>Analytics AI Agent</h3>
+            <p>Turns data into insights, reports, recommendations, and forecasting with zero manual effort.</p>
+            <div class="ai-page-agent-features"><span>Forecasting</span><span>KPIs</span></div>
+            <div class="ai-page-status">Running</div>
+          </article>
+          <article class="ai-page-agent-card">
+            <div class="ai-page-agent-icon">⚙️</div>
+            <h3>Workflow Automation Agent</h3>
+            <p>Orchestrates business operations, approvals, and repeatable actions across your tools.</p>
+            <div class="ai-page-agent-features"><span>Orchestration</span><span>API Driven</span></div>
+            <div class="ai-page-status">Online</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ai-page-section ai-page-reveal">
+      <div class="container">
+        <div class="ai-page-section-head">
+          <span>04</span>
+          <h2>AI Technology Stack</h2>
+          <p>We combine powerful AI models, automation platforms, and integrations to build resilient systems.</p>
+        </div>
+        <div class="ai-page-tech-grid">
+          <div class="ai-page-tech-badge">OpenAI</div>
+          <div class="ai-page-tech-badge">Claude</div>
+          <div class="ai-page-tech-badge">Gemini</div>
+          <div class="ai-page-tech-badge">n8n</div>
+          <div class="ai-page-tech-badge">Zapier</div>
+          <div class="ai-page-tech-badge">Make</div>
+          <div class="ai-page-tech-badge">Python</div>
+          <div class="ai-page-tech-badge">LangChain</div>
+          <div class="ai-page-tech-badge">APIs</div>
+          <div class="ai-page-tech-badge">CRM Integration</div>
+          <div class="ai-page-tech-badge">WhatsApp Business API</div>
+          <div class="ai-page-tech-badge">Secure Deployments</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ai-page-section ai-page-reveal">
+      <div class="container">
+        <div class="ai-page-section-head">
+          <span>05</span>
+          <h2>AI Automation Use Cases</h2>
+          <p>From healthcare to finance, automation turns repetitive work into a high-performance advantage.</p>
+        </div>
+        <div class="ai-page-usecase-grid">
+          <article class="ai-page-usecase-card">
+            <h3>Healthcare</h3>
+            <p>Automate patient communication, booking reminders, and follow-up workflows while reducing manual load on teams.</p>
+          </article>
+          <article class="ai-page-usecase-card">
+            <h3>Real Estate</h3>
+            <p>Qualify buyers, nurture prospects, and automate property follow-ups to keep opportunities moving faster.</p>
+          </article>
+          <article class="ai-page-usecase-card">
+            <h3>E-Commerce</h3>
+            <p>Power order support, recovery campaigns, and product recommendations that lift conversions and retention.</p>
+          </article>
+          <article class="ai-page-usecase-card">
+            <h3>Education</h3>
+            <p>Streamline admissions, student support, and scheduling with automated responses and intelligent routing.</p>
+          </article>
+          <article class="ai-page-usecase-card">
+            <h3>Finance</h3>
+            <p>Accelerate onboarding, documentation review, and customer support while strengthening compliance workflows.</p>
+          </article>
+          <article class="ai-page-usecase-card">
+            <h3>Professional Services</h3>
+            <p>Reduce admin overhead and deliver faster responses through AI-driven intake, follow-up, and reporting.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="pricing" class="section fade-in">
       <div class="container plans-wrapper">
         <div class="plans-hero-grid">
@@ -263,16 +982,34 @@
         </div>
       </div>
     </section>
-    <section class="section fade-in">
+    <section class="section fade-in ai-page-reveal">
       <div class="container">
-        <h2 class="section-title">FAQ</h2>
-        <div class="about-copy">
-          <h3>AI Business Automation</h3>
-          <p>We automate repetitive tasks, approvals, customer responses, and data workflows so teams can focus on higher-value work.</p>
-          <h3>AI Chatbot Development</h3>
-          <p>Our chatbots are built for intent detection, natural language interactions, handover to agents, and seamless self-service.</p>
-          <h3>Generative AI Applications</h3>
-          <p>We create generative AI tools for content creation, creative assistance, and personalized communications that match your brand voice.</p>
+        <div class="ai-page-section-head">
+          <span>06</span>
+          <h2>AI Automation FAQ</h2>
+          <p>Everything you need to know about deploying intelligent automation inside your business.</p>
+        </div>
+        <div class="ai-page-faq-list">
+          <div class="ai-page-faq-item active">
+            <button class="ai-page-faq-question" type="button" aria-expanded="true">What businesses can use AI automation?<span>+</span></button>
+            <div class="ai-page-faq-answer"><p>AI automation is ideal for service teams, sales teams, e-commerce brands, healthcare providers, education institutions, and professional service firms that want to reduce repetition and improve customer response.</p></div>
+          </div>
+          <div class="ai-page-faq-item">
+            <button class="ai-page-faq-question" type="button" aria-expanded="false">How long does AI implementation take?<span>+</span></button>
+            <div class="ai-page-faq-answer"><p>Most pilot deployments can be launched within a few days to a couple of weeks, depending on your workflows, integrations, and the complexity of your automation needs.</p></div>
+          </div>
+          <div class="ai-page-faq-item">
+            <button class="ai-page-faq-question" type="button" aria-expanded="false">Can AI integrate with existing software?<span>+</span></button>
+            <div class="ai-page-faq-answer"><p>Yes. We connect AI systems with CRMs, e-commerce tools, helpdesk platforms, messaging apps, and internal business systems through APIs and integrations.</p></div>
+          </div>
+          <div class="ai-page-faq-item">
+            <button class="ai-page-faq-question" type="button" aria-expanded="false">Do you provide AI maintenance?<span>+</span></button>
+            <div class="ai-page-faq-answer"><p>Absolutely. We support performance tuning, workflow updates, onboarding improvements, and ongoing optimization so your automation continues to deliver value.</p></div>
+          </div>
+          <div class="ai-page-faq-item">
+            <button class="ai-page-faq-question" type="button" aria-expanded="false">What is the cost of AI automation?<span>+</span></button>
+            <div class="ai-page-faq-answer"><p>Costs depend on the scope of the project, the number of integrations involved, and the level of automation required. We offer starter, professional, and enterprise options to fit your needs.</p></div>
+          </div>
         </div>
       </div>
     </section>
@@ -361,5 +1098,34 @@
     <p class="copyright">© 2026 zyDual. All rights reserved.</p>
   </footer>
   <script src="../script.js"></script>
+  <script>
+    const faqItems = document.querySelectorAll('.ai-page-faq-item');
+    faqItems.forEach((item) => {
+      const button = item.querySelector('.ai-page-faq-question');
+      button.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        faqItems.forEach((entry) => {
+          entry.classList.remove('active');
+          entry.querySelector('.ai-page-faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    const revealItems = document.querySelectorAll('.ai-page-reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  </script>
 </body>
 </html>
