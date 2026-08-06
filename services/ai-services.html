@@ -277,6 +277,202 @@
       animation-duration: 3s;
     }
 
+    .ai-page-dashboard .workflow {
+      position: relative;
+      width: 100%;
+      min-height: 360px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ai-page-dashboard .workflow::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(45, 209, 255, 0.14), transparent 38%),
+                  radial-gradient(circle at 70% 35%, rgba(124, 58, 237, 0.12), transparent 40%);
+      pointer-events: none;
+    }
+
+    .ai-page-dashboard .workflow .node {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: .35s ease;
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(0, 0, 0, .2);
+      z-index: 1;
+    }
+
+    .ai-page-dashboard .workflow .node:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 0 40px #7c3aed, 0 0 80px rgba(124, 58, 237, 0.24);
+    }
+
+    .ai-page-dashboard .workflow .node h3 {
+      margin-top: 12px;
+      font-size: 1.05rem;
+      color: #eef2ff;
+    }
+
+    .ai-page-dashboard .workflow .node p {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: rgba(226, 232, 255, 0.76);
+      text-align: center;
+      padding: 0 12px;
+      line-height: 1.4;
+    }
+
+    .ai-page-dashboard .workflow .icon {
+      font-size: 52px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .ai-page-dashboard .workflow .input {
+      left: 18px;
+      top: 96px;
+    }
+
+    .ai-page-dashboard .workflow .ai {
+      left: calc(50% - 105px);
+      top: 68px;
+      width: 210px;
+      height: 210px;
+      background: linear-gradient(135deg, #2563eb, #00d4ff);
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .ai-page-dashboard .workflow .output {
+      right: 18px;
+      top: 96px;
+    }
+
+    .ai-page-dashboard .workflow .crm {
+      left: calc(50% - 85px);
+      bottom: 30px;
+    }
+
+    .ai-page-dashboard .workflow .ai::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border: 2px solid rgba(255, 255, 255, .2);
+      border-radius: 50%;
+      animation: spin 8s linear infinite;
+      top: -35px;
+      left: -35px;
+    }
+
+    .ai-page-dashboard .workflow .ai::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border: 2px dashed rgba(255, 255, 255, .25);
+      border-radius: 50%;
+      animation: spinReverse 6s linear infinite;
+      bottom: 16px;
+      right: 16px;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spinReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    .ai-page-dashboard .workflow svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      z-index: 0;
+    }
+
+    .ai-page-dashboard .workflow .path {
+      fill: none;
+      stroke: rgba(83, 148, 255, 0.24);
+      stroke-width: 4;
+    }
+
+    .ai-page-dashboard .workflow .flow {
+      fill: none;
+      stroke: #7c3aed;
+      stroke-width: 5;
+      stroke-linecap: round;
+      stroke-dasharray: 12 18;
+      animation: flow 2s linear infinite;
+      filter: drop-shadow(0 0 12px rgba(124, 58, 237, 0.65));
+    }
+
+    @keyframes flow {
+      from { stroke-dashoffset: 100; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    .ai-page-dashboard .workflow .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #00eaff;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.55);
+      animation: particles 6s linear infinite;
+      opacity: .6;
+      z-index: 0;
+    }
+
+    @keyframes particles {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-40px); }
+      100% { transform: translateY(0); }
+    }
+
+    .ai-page-dashboard .workflow .status {
+      position: absolute;
+      bottom: -58px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 14px 28px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      font-size: .9rem;
+      letter-spacing: 1px;
+      color: #9eefff;
+      z-index: 1;
+    }
+
+    @media (max-width: 1000px) {
+      .ai-page-dashboard .workflow {
+        transform: scale(.84);
+      }
+    }
+
     .ai-page-section {
       margin-top: 30px;
     }
@@ -690,14 +886,37 @@
           </div>
         </div>
         <div class="ai-page-dashboard" aria-label="Animated AI automation flow">
-          <div class="ai-page-dashboard-glow"></div>
-          <div class="ai-page-node ai-page-node-input">Customer Request</div>
-          <div class="ai-page-connection ai-page-connection--1"></div>
-          <div class="ai-page-node ai-page-node-brain">AI Brain</div>
-          <div class="ai-page-connection ai-page-connection--2"></div>
-          <div class="ai-page-node ai-page-node-engine">Automation Engine</div>
-          <div class="ai-page-connection ai-page-connection--3"></div>
-          <div class="ai-page-node ai-page-node-result">Business Result</div>
+          <div class="workflow">
+            <svg>
+              <path class="path" d="M170 295 L500 275" />
+              <path class="flow" d="M170 295 L500 275" />
+              <path class="path" d="M710 275 L1030 295" />
+              <path class="flow" d="M710 275 L1030 295" />
+              <path class="path" d="M605 380 L605 520" />
+              <path class="flow" d="M605 380 L605 520" />
+            </svg>
+            <div class="node input">
+              <div class="icon">📥</div>
+              <h3>Input</h3>
+              <p>Website<br>Email<br>Forms</p>
+            </div>
+            <div class="node ai">
+              <div class="icon">🧠</div>
+              <h3>AI Engine</h3>
+              <p>Thinking...</p>
+            </div>
+            <div class="node output">
+              <div class="icon">🚀</div>
+              <h3>Output</h3>
+              <p>Customer Response</p>
+            </div>
+            <div class="node crm">
+              <div class="icon">⚙️</div>
+              <h3>Automation</h3>
+              <p>CRM • APIs • n8n</p>
+            </div>
+            <div class="status">AI Workflow Running...</div>
+          </div>
         </div>
       </div>
     </section>
@@ -1126,6 +1345,54 @@
     }, { threshold: 0.16 });
 
     revealItems.forEach((item) => revealObserver.observe(item));
+
+    const workflowText = document.querySelector('.workflow .ai p');
+    const workflowSteps = [
+      'Reading Data...',
+      'Analyzing...',
+      'Making Decision...',
+      'Calling APIs...',
+      'Running Workflow...',
+      'Automation Complete ✓'
+    ];
+    let workflowIndex = 0;
+
+    if (workflowText) {
+      setInterval(() => {
+        workflowText.textContent = workflowSteps[workflowIndex];
+        workflowIndex = (workflowIndex + 1) % workflowSteps.length;
+      }, 1700);
+    }
+
+    const dashboard = document.querySelector('.ai-page-dashboard');
+    if (dashboard) {
+      for (let x = 0; x < 30; x += 1) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = `${Math.random() * dashboard.clientWidth}px`;
+        particle.style.top = `${Math.random() * dashboard.clientHeight}px`;
+        particle.style.animationDuration = `${4 + Math.random() * 4}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        dashboard.appendChild(particle);
+      }
+    }
+
+    document.querySelectorAll('.workflow .node').forEach((node) => {
+      node.addEventListener('mousemove', (e) => {
+        const rect = node.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        node.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 229, 255, .35), rgba(255, 255, 255, .05))`;
+      });
+
+      node.addEventListener('mouseleave', () => {
+        if (node.classList.contains('ai')) {
+          node.style.background = 'linear-gradient(135deg, #2563eb, #00d4ff)';
+        } else {
+          node.style.background = 'rgba(255, 255, 255, .05)';
+        }
+      });
+    });
   </script>
 </body>
 </html>
