@@ -1,0 +1,23 @@
+{
+  "name": "zydual-website",
+  "version": "1.0.0",
+  "description": "zyDual - Web Development, SEO & Digital Marketing Agency website",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyDual-in/zyDual.in.git"
+  },
+  "keywords": ["web development", "seo", "digital marketing"],
+  "author": "zyDual",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zyDual-in/zyDual.in/issues"
+  },
+  "homepage": "https://github.com/zyDual-in/zyDual.in#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
