@@ -8,6 +8,30 @@ const contactForms = Array.from(document.querySelectorAll('.contact-form'));
 const counters = document.querySelectorAll('.stat-number');
 const testimonialCards = document.querySelectorAll('.testimonial-card');
 const testimonialButtons = document.querySelectorAll('.testimonial-btn');
+const GOOGLE_REVIEW_LINK = 'https://g.page/r/Cbk1ta5vNH_SEAE/review';
+const reviews = [
+  {
+    name: 'Vetriarasiwatersuppyl',
+    initial: 'V',
+    rating: 5,
+    date: 'Recently',
+    text: 'I had a great experience with the Zydual team for my company website and digital marketing. Their professionalism and support helped me get more customers. I’m very happy with their work and looking forward to working with them again in the future. Highly recommended!.'
+  },
+  {
+    name: 'Songs',
+    initial: 'S',
+    rating: 5,
+    date: 'Recently',
+    text: 'Great experience with Zydual! Their team is professional, responsive, and focused on understanding the actual business requirements before suggesting solutions. The quality of their web development, digital marketing, and AI automation services is impressive .'
+  },
+  {
+    name: 'Demo Client Three',
+    initial: 'R',
+    rating: 5,
+    date: 'Recently',
+    text: 'Demo review placeholder: swap in a real Google review for your brand, product, or service experience.'
+  }
+];
 
 function setNavbarState() {
   if (window.scrollY > 40) {
@@ -102,20 +126,22 @@ window.addEventListener('DOMContentLoaded', () => {
   counters.forEach((counter) => counterObserver.observe(counter));
 
   // Testimonials
-  function showTestimonial(index) {
-    testimonialCards.forEach((card, i) => {
-      card.classList.toggle('active', i === index);
+  if (testimonialCards.length > 0) {
+    function showTestimonial(index) {
+      testimonialCards.forEach((card, i) => {
+        card.classList.toggle('active', i === index);
+      });
+      testimonialButtons.forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+      });
+    }
+
+    testimonialButtons.forEach((button) => {
+      button.addEventListener('click', () => showTestimonial(Number(button.dataset.index)));
     });
-    testimonialButtons.forEach((btn, i) => {
-      btn.classList.toggle('active', i === index);
-    });
+
+    showTestimonial(0);
   }
-
-  testimonialButtons.forEach((button) => {
-    button.addEventListener('click', () => showTestimonial(Number(button.dataset.index)));
-  });
-
-  showTestimonial(0);
 
   // Portfolio filters
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -142,11 +168,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  let testimonialIndex = 0;
-  setInterval(() => {
-    testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
-    showTestimonial(testimonialIndex);
-  }, 6000);
+  if (testimonialCards.length > 0) {
+    let testimonialIndex = 0;
+    setInterval(() => {
+      testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
+      showTestimonial(testimonialIndex);
+    }, 6000);
+  }
 
   // Website cost calculator
   const costConfig = {
@@ -854,6 +882,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Testimonials Carousel & Portfolio Modal
 document.addEventListener('DOMContentLoaded', function() {
+  const googleReviewsGrid = document.getElementById('googleReviewsGrid');
+
+  if (googleReviewsGrid) {
+    googleReviewsGrid.innerHTML = reviews.map((review) => {
+      const stars = Array.from({ length: review.rating }, () => '★').join('');
+
+      return `
+        <article class="google-review-card" aria-label="Google review from ${review.name}">
+          <div class="google-review-top">
+            <div class="google-review-profile">
+              <div class="google-review-avatar" aria-hidden="true">${review.initial}</div>
+              <div>
+                <h3 class="google-review-name">${review.name}</h3>
+              </div>
+            </div>
+            <div class="google-review-source">
+              <span class="google-source-mark" aria-hidden="true">G</span>
+              <span>Google Review</span>
+            </div>
+          </div>
+
+          <div class="google-review-stars" aria-label="${review.rating} out of 5 stars">${stars}</div>
+
+          <p class="google-review-text">“${review.text}”</p>
+
+          <div class="google-review-meta">
+            <span class="google-review-date">${review.date}</span>
+            <span class="google-review-verified" aria-label="Verified Google review">
+              <span aria-hidden="true">✓</span>
+              Verified
+            </span>
+          </div>
+
+          <a class="google-review-link" href="${GOOGLE_REVIEW_LINK}" target="_blank" rel="noopener noreferrer" aria-label="View review for ${review.name} on Google">
+            View on Google <span aria-hidden="true">→</span>
+          </a>
+        </article>
+      `;
+    }).join('');
+
+    const writeReviewButton = document.querySelector('.google-review-button');
+    if (writeReviewButton) {
+      writeReviewButton.href = GOOGLE_REVIEW_LINK;
+    }
+  }
+
   // Testimonials Carousel
   const testimonialSlides = document.querySelectorAll('.testimonial-slide');
   const testimonialDots = document.querySelectorAll('.testimonial-dots .dot');
