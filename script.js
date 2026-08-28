@@ -25,11 +25,11 @@ const reviews = [
     text: 'Great experience with Zydual! Their team is professional, responsive, and focused on understanding the actual business requirements before suggesting solutions. The quality of their web development, digital marketing, and AI automation services is impressive .'
   },
   {
-    name: 'Demo Client Three',
-    initial: 'R',
+    name: 'Nivash M',
+    initial: 'N',
     rating: 5,
     date: 'Recently',
-    text: 'Demo review placeholder: swap in a real Google review for your brand, product, or service experience.'
+    text: 'Very good platform to meet your business marketing needs. Also the website design for Commercial business is quite user friendly..'
   }
 ];
 
@@ -413,7 +413,11 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['calculator', 'cost calculator', 'estimate cost'],
-      answer: 'Use the website cost calculator on the home page to estimate the cost of a WordPress or custom website based on pages and add-on features.',
+      answer: 'Use the Cost Estimator on the home page to compare website, app, graphic design, SEO, digital marketing, business growth, and AI Automation plans. Select a plan or add-on to see the live monthly or yearly estimate.',
+    },
+    {
+      keywords: ['ai automation', 'automation', 'ai assistant', 'chatbot'],
+      answer: 'Our AI Automation service helps businesses automate lead capture, customer support, follow-ups, CRM workflows, and reporting. The Cost Estimator includes Starter, Growth, and Enterprise AI Automation plans from ₹15,000 per month. Final pricing depends on integrations and workflow scope.',
     },
     {
       keywords: ['maintenance', 'support', 'updates', 'ongoing'],
