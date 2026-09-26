@@ -27,14 +27,42 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://zydual.vercel.app/services/web-development.html#service",
     "name": "Zydual Web Development",
     "description": "Custom business websites, corporate sites, e-commerce stores, landing pages, optimization, and maintenance services.",
     "provider": {
       "@type": "Organization",
+      "@id": "https://zydual.vercel.app/#organization",
       "name": "zyDual",
       "url": "https://zydual.vercel.app/"
     },
     "serviceType": "Web Development",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Web Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://zydual.vercel.app/services/web-development.html#ecommerce",
+            "name": "E-Commerce Solutions",
+            "provider": { "@id": "https://zydual.vercel.app/#organization" },
+            "url": "https://zydual.vercel.app/services/web-development.html"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://zydual.vercel.app/services/web-development.html#crm-integration",
+            "name": "CRM Integration",
+            "provider": { "@id": "https://zydual.vercel.app/#organization" },
+            "url": "https://zydual.vercel.app/services/web-development.html"
+          }
+        }
+      ]
+    },
     "areaServed": {
       "@type": "Country",
       "name": "India"

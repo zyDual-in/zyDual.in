@@ -30,6 +30,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://zydual.vercel.app/#organization",
     "name": "Zydual",
     "url": "https://zydual.vercel.app",
     "logo": "https://zydual.vercel.app/zyDual-logo.jpeg",
@@ -42,13 +43,28 @@
       "postalCode": "641035",
       "addressCountry": "IN"
     },
-    "telephone": "+91 8072275209",
+    "telephone": "+91 93424 31824",
     "email": "zydual.in@gmail.com",
     "sameAs": [
       "https://www.linkedin.com/company/zydual/",
       "https://www.instagram.com/zydual.in",
-      "https://x.com/zydual"
+      "https://x.com/zydual",
+      "https://github.com/zyDual-in/zyDual.in"
     ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Zydual Digital Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/ai-services.html#service" } },
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/web-development.html#service" } },
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/business-growth.html#service" } },
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/digital-marketing.html#service" } },
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/seo-services.html#service" } },
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/dropshipping-services.html#service" } },
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/branding.html#service" } },
+        { "@type": "Offer", "itemOffered": { "@id": "https://zydual.vercel.app/services/mobile-app-development.html#service" } }
+      ]
+    },
     "founder": {
       "@type": "Person",
       "name": "zyDual Team"
@@ -60,9 +76,11 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://zydual.vercel.app/#website",
     "name": "Zydual",
     "url": "https://zydual.vercel.app",
     "description": "Zydual is an IT & Digital Service Company focused on AI automation, digital transformation, web development, SEO, digital marketing, and business growth solutions.",
+    "publisher": { "@id": "https://zydual.vercel.app/#organization" },
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://zydual.vercel.app/?s={search_term_string}",

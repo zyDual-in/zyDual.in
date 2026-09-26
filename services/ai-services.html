@@ -27,14 +27,52 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://zydual.vercel.app/services/ai-services.html#service",
     "name": "Zydual AI Services",
     "description": "AI consulting, chatbot development, business automation, ML solutions, and generative AI applications for enterprise growth.",
     "provider": {
       "@type": "Organization",
+      "@id": "https://zydual.vercel.app/#organization",
       "name": "zyDual",
       "url": "https://zydual.vercel.app/"
     },
     "serviceType": "Artificial Intelligence Solutions",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "AI Automation Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://zydual.vercel.app/services/ai-services.html#ai-chatbots",
+            "name": "AI Chatbots & Customer Support Automation",
+            "provider": { "@id": "https://zydual.vercel.app/#organization" },
+            "url": "https://zydual.vercel.app/services/ai-services.html"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://zydual.vercel.app/services/ai-services.html#crm-automation",
+            "name": "CRM Integration & Business Process Automation",
+            "provider": { "@id": "https://zydual.vercel.app/#organization" },
+            "url": "https://zydual.vercel.app/services/ai-services.html"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://zydual.vercel.app/services/ai-services.html#whatsapp-automation",
+            "name": "WhatsApp Conversation Automation",
+            "provider": { "@id": "https://zydual.vercel.app/#organization" },
+            "url": "https://zydual.vercel.app/services/ai-services.html"
+          }
+        }
+      ]
+    },
     "areaServed": {
       "@type": "Country",
       "name": "India"
