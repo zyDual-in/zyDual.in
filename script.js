@@ -345,35 +345,43 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['web development', 'website development', 'websites', 'e-commerce', 'landing page'],
-      answer: 'We build business websites, corporate websites, landing pages, and e-commerce stores that are fast, responsive and optimized for conversions. Our services also include website optimization and website maintenance.',
+      priority: 20,
+      answer: 'Website Development pricing: Starter ₹7,999, Business ₹14,999, and Professional ₹24,999+. Website add-ons include Admin Dashboard ₹5,000–₹12,000; User Login / Authentication ₹3,000–₹8,000; Payment Gateway Integration ₹4,000–₹10,000; E-commerce Functionality ₹10,000–₹35,000; SEO Setup (Basic) ₹3,000–₹8,000; Website Maintenance ₹1,500–₹5,000/month; Speed Optimization ₹2,000–₹6,000; Additional Page ₹500–₹1,500/page; and CRM Integration ₹4,999+. We build responsive business websites, landing pages, and e-commerce stores. Use the Cost Estimator to calculate your selected package.',
     },
     {
       keywords: ['seo', 'search engine', 'organic visibility', 'technical seo', 'on-page seo', 'off-page seo', 'seo audit'],
-      answer: 'Our SEO service improves organic visibility with local SEO, technical SEO, on-page optimization, off-page authority building and SEO audits. We focus on measurable ranking improvements and better search traffic.',
+      priority: 20,
+      answer: 'SEO plans are Starter SEO at ₹5,999/month, Growth SEO at ₹9,999/month, and Advanced SEO at ₹15,999/month. Services include local and technical SEO, on-page optimization, authority building, and SEO audits.',
     },
     {
       keywords: ['digital marketing', 'marketing', 'campaign', 'google ads', 'meta ads', 'content marketing'],
-      answer: 'We deliver digital marketing through social media campaigns, lead generation, Google Ads, Meta Ads, content marketing and marketing strategy. Our campaigns are designed to increase visibility, traffic quality and ROI.',
+      priority: 20,
+      answer: 'Digital Marketing plans are Starter at ₹7,500/month, Growth at ₹15,000/month, and Premium at ₹25,000/month+. Services include social media campaigns, lead generation, Google Ads, Meta Ads, content marketing, and marketing strategy.',
     },
     {
       keywords: ['branding', 'brand identity', 'logo design', 'brand strategy', 'social media branding', 'brand guidelines'],
-      answer: 'Our branding services include logo design, brand identity, brand strategy, social media branding and brand guidelines. We help businesses build consistent visual systems that feel modern and memorable.',
+      priority: 20,
+      answer: 'Graphic Design and branding packages are Single Design at ₹499, 5 Designs at ₹1,999, and Monthly Design Package at ₹4,999+/month. Services include logo design, brand identity, brand strategy, social media branding, and brand guidelines.',
     },
     {
       keywords: ['mobile app', 'app development', 'android', 'ios', 'cross-platform', 'app testing', 'app maintenance'],
-      answer: 'We build Android, iOS and cross-platform mobile apps with strong UI/UX, testing and post-launch maintenance. Our apps are designed to deliver polished user experiences and reliable performance.',
+      priority: 20,
+      answer: 'App Development packages are Basic App at ₹14,999, Business App at ₹29,999, and Advanced App at ₹49,999+. We build Android, iOS, and cross-platform apps with UI/UX design, testing, and post-launch support.',
     },
     {
       keywords: ['business growth', 'growth strategy', 'market expansion', 'lead generation', 'conversion optimization', 'customer acquisition', 'revenue planning'],
-      answer: 'Our business growth service covers growth strategy, market expansion, lead generation, conversion optimization, customer acquisition and revenue planning. We help businesses scale with measurable campaigns and business-focused planning.',
+      priority: 20,
+      answer: 'Business Growth and Consulting pricing is Consultation at ₹4,999/session, Growth Strategy at ₹9,999, and Business Growth Management at ₹19,999+. Services cover market expansion, lead generation, conversion optimization, customer acquisition, and revenue planning.',
     },
     {
       keywords: ['dropshipping', 'shopify', 'store setup', 'product research', 'supplier management'],
-      answer: 'We help launch dropshipping stores with Shopify setup, product research, supplier management, marketing and conversion optimization. Our service is focused on building reliable e-commerce businesses with strong sales funnels.',
+      priority: 20,
+      answer: 'Dropshipping packages use the website development tiers: Starter at ₹7,999, Business at ₹14,999, and Professional at ₹24,999+. We help with Shopify setup, product research, supplier management, marketing, and conversion optimization. Final scope depends on store requirements.',
     },
     {
       keywords: ['ai services', 'ai', 'chatbot', 'automation', 'machine learning', 'generative ai', 'content generation'],
-      answer: 'Our AI services include chatbot development, business automation, AI content generation, machine learning solutions and AI integrations. We focus on practical AI systems that improve productivity and customer experience.',
+      priority: 20,
+      answer: 'AI Automation pricing is Starter Automation at ₹9,999, Business Automation at ₹24,999, and Advanced AI Automation at ₹49,999+. Custom Enterprise Automation is available by custom quote. We build chatbots, workflow automation, AI integrations, and practical machine learning solutions.',
     },
     {
       keywords: ['blog', 'article', 'articles', 'insights', 'guides', 'blog page'],
@@ -409,15 +417,16 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     {
       keywords: ['pricing', 'cost', 'estimate', 'quote', 'plans', 'price'],
-      answer: 'Our pricing is flexible based on project scope. Basic websites start around ₹7,500 and advanced solutions like e-commerce, apps, or custom platforms are quoted after a discovery conversation. Use the cost calculator for a rough estimate.',
+      answer: 'Current prices: Websites: Starter ₹7,999, Business ₹14,999, Professional ₹24,999+. Apps: Basic ₹14,999, Business ₹29,999, Advanced ₹49,999+. Graphic Design: Single Design ₹499, 5 Designs ₹1,999, Monthly Design Package ₹4,999+/month. SEO: Starter ₹5,999/month, Growth ₹9,999/month, Advanced ₹15,999/month. Digital Marketing: Starter ₹7,500/month, Growth ₹15,000/month, Premium ₹25,000/month+. Business Growth: Consultation ₹4,999/session, Growth Strategy ₹9,999, Business Growth Management ₹19,999+. AI Automation: Starter ₹9,999, Business ₹24,999, Advanced ₹49,999+, Custom Enterprise Automation by quote. Dropshipping: ₹7,999, ₹14,999, and ₹24,999+ packages. Website Add-Ons: Admin Dashboard ₹5,000–₹12,000; User Login / Authentication ₹3,000–₹8,000; Payment Gateway Integration ₹4,000–₹10,000; E-commerce Functionality ₹10,000–₹35,000; SEO Setup (Basic) ₹3,000–₹8,000; Website Maintenance ₹1,500–₹5,000/month; Speed Optimization ₹2,000–₹6,000; Additional Page ₹500–₹1,500/page; CRM Integration ₹4,999+. Use the Cost Estimator for a combined quote.',
     },
     {
       keywords: ['calculator', 'cost calculator', 'estimate cost'],
-      answer: 'Use the Cost Estimator on the home page to compare website, app, graphic design, SEO, digital marketing, business growth, and AI Automation plans. Select a plan or add-on to see the live monthly or yearly estimate.',
+      answer: 'Open the Cost Estimator page to compare Website Development, Website Add-Ons, App Development, Graphic Design, SEO, Digital Marketing, Business Growth / Consulting, and AI Automation. Select plans and multiple add-ons to see a live combined estimate.',
     },
     {
       keywords: ['ai automation', 'automation', 'ai assistant', 'chatbot'],
-      answer: 'Our AI Automation service helps businesses automate lead capture, customer support, follow-ups, CRM workflows, and reporting. The Cost Estimator includes Starter, Growth, and Enterprise AI Automation plans from ₹15,000 per month. Final pricing depends on integrations and workflow scope.',
+      priority: 20,
+      answer: 'AI Automation packages are Starter Automation ₹9,999, Business Automation ₹24,999, and Advanced AI Automation ₹49,999+. Custom Enterprise Automation is available by custom quote. We automate lead capture, customer support, follow-ups, CRM workflows, and reporting. Final scope depends on integrations and workflow requirements.',
     },
     {
       keywords: ['maintenance', 'support', 'updates', 'ongoing'],
@@ -430,6 +439,11 @@ window.addEventListener('DOMContentLoaded', () => {
     {
       keywords: ['admin dashboard', 'backend', 'cms', 'management panel'],
       answer: 'Our admin dashboard solutions let you manage website content, orders, users and products without technical help. They are great for e-commerce and business websites.',
+    },
+    {
+      keywords: ['website add-on', 'website add-ons', 'crm integration', 'admin dashboard', 'user login', 'payment gateway'],
+      priority: 20,
+      answer: 'Website Add-On pricing: Admin Dashboard ₹5,000–₹12,000; User Login / Authentication ₹3,000–₹8,000; Payment Gateway Integration ₹4,000–₹10,000; E-commerce Functionality ₹10,000–₹35,000; SEO Setup (Basic) ₹3,000–₹8,000; Website Maintenance ₹1,500–₹5,000/month; Speed Optimization ₹2,000–₹6,000; Additional Page ₹500–₹1,500/page; CRM Integration ₹4,999+. You can select multiple add-ons in the Cost Estimator for a combined estimate.',
     },
     {
       keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'greetings', 'welcome'],
@@ -447,11 +461,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function getChatReply(message) {
     const normalized = normalizeText(message);
-    const matching = chatKnowledge.find((entry) => entry.keywords.every((keyword) => normalized.includes(keyword)));
-    if (matching) return matching.answer;
-
-    const partial = chatKnowledge.find((entry) => entry.keywords.some((keyword) => normalized.includes(keyword)));
-    if (partial) return partial.answer;
+    const asksPricing = /\b(price|pricing|cost|quote|estimate|rate)\b/.test(normalized);
+    const matches = chatKnowledge.flatMap((entry) => entry.keywords
+      .map((keyword) => normalizeText(keyword))
+      .filter((keyword) => normalized.includes(keyword))
+      .map((keyword) => ({ entry, keyword })));
+    matches.sort((first, second) => {
+      const firstScore = first.keyword.length + (asksPricing ? first.entry.priority || 0 : 0);
+      const secondScore = second.keyword.length + (asksPricing ? second.entry.priority || 0 : 0);
+      return secondScore - firstScore;
+    });
+    if (matches.length > 0) return matches[0].entry.answer;
 
     return 'I can help with our services, pricing plans, portfolio highlights, contact details, and how to start your project. Try asking: “What services do you offer?” or “How can I contact zyDual?”.';
   }
@@ -626,8 +646,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateCalculation() {
     const selectedPlans = [];
     const selectedAddons = [];
+    let oneTimeTotal = 0;
     let monthlyTotal = 0;
     let yearlyTotal = 0;
+    let hasCustomQuote = false;
 
     // Get all selected radio groups (plans)
     const planGroups = document.querySelectorAll('.radio-group');
@@ -638,13 +660,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const price = parseInt(checked.dataset.price) || 0;
         const isMonthly = checked.dataset.monthly === 'true';
 
-        selectedPlans.push({ label, price, isMonthly });
+        const isCustomQuote = checked.dataset.customQuote === 'true';
+        const item = { label, price, isMonthly, isCustomQuote };
+        if (group.dataset.category === 'addon') {
+          selectedAddons.push(item);
+        } else {
+          selectedPlans.push(item);
+        }
+        hasCustomQuote = hasCustomQuote || isCustomQuote;
 
         if (isMonthly) {
           monthlyTotal += price;
           yearlyTotal += price * 12;
         } else {
-          yearlyTotal += price;
+          oneTimeTotal += price;
         }
       }
     });
@@ -658,20 +687,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const price = parseInt(checked.dataset.price) || 0;
         const isMonthly = checked.dataset.monthly === 'true';
 
-        selectedAddons.push({ label, price, isMonthly });
+        selectedAddons.push({
+          label,
+          price,
+          displayPrice: checked.dataset.displayPrice,
+          isMonthly,
+          isCustomQuote: false,
+        });
 
         if (isMonthly) {
           monthlyTotal += price;
           yearlyTotal += price * 12;
         } else {
-          yearlyTotal += price;
+          oneTimeTotal += price;
         }
       });
     });
 
     // Update UI
     renderSelectedItems(selectedPlans, selectedAddons);
-    renderTotal(monthlyTotal, yearlyTotal);
+    renderTotal(oneTimeTotal, monthlyTotal, yearlyTotal, hasCustomQuote);
   }
 
   // Render selected items to summary
@@ -683,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedPlansList.innerHTML = plans.map(plan => `
         <li>
           <span>${plan.label}</span>
-          <span class="item-price">₹${plan.price.toLocaleString()}</span>
+          <span class="item-price">${plan.isCustomQuote ? 'Custom Quote' : `₹${plan.price.toLocaleString()}`}</span>
         </li>
       `).join('');
     }
@@ -695,27 +730,30 @@ document.addEventListener('DOMContentLoaded', () => {
       selectedAddonsList.innerHTML = addons.map(addon => `
         <li>
           <span>${addon.label}</span>
-          <span class="item-price">₹${addon.price.toLocaleString()}</span>
+          <span class="item-price">${addon.isCustomQuote ? 'Custom Quote' : addon.displayPrice || `₹${addon.price.toLocaleString()}`}</span>
         </li>
       `).join('');
     }
   }
 
   // Render total amount
-  function renderTotal(monthly, yearly) {
+  function renderTotal(oneTime, monthly, yearly, hasCustomQuote) {
     let displayAmount;
     let displayPeriod;
+    const recurringAmount = summaryView === 'monthly' ? monthly : yearly;
 
     if (summaryView === 'monthly') {
-      displayAmount = monthly;
-      displayPeriod = 'per month';
+      displayAmount = oneTime + monthly;
+      displayPeriod = oneTime > 0 && monthly > 0 ? 'one-time + per month' : oneTime > 0 ? 'one-time' : 'per month';
     } else {
-      displayAmount = yearly;
-      displayPeriod = 'per year';
+      displayAmount = oneTime + yearly;
+      displayPeriod = oneTime > 0 && yearly > 0 ? 'one-time + per year' : oneTime > 0 ? 'one-time' : 'per year';
     }
 
-    totalAmountEl.textContent = `₹${displayAmount.toLocaleString()}`;
-    totalPeriodEl.textContent = displayPeriod;
+    totalAmountEl.textContent = hasCustomQuote
+      ? `${recurringAmount + oneTime > 0 ? `₹${displayAmount.toLocaleString()} + ` : ''}Custom Quote`
+      : `₹${displayAmount.toLocaleString()}`;
+    totalPeriodEl.textContent = hasCustomQuote ? 'Contact us for enterprise pricing' : displayPeriod;
   }
 
   // Initial calculation
